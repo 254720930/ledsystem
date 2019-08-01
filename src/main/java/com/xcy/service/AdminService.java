@@ -4,5 +4,5 @@ import com.xcy.pojo.Admin;
 
 public interface AdminService {
 
-    int login(Admin admin);
+    String login(Admin admin);
 }

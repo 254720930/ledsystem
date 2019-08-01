@@ -24,13 +24,12 @@ $(function() {
 // 登录
 function login() {
 	$.ajax({
-		url:'/admin/login',
-		type: 'POST',
+		url:'login',
+		type:'POST',
 		data: {
 			username: $('#username').val(),
 			password: $('#password').val(),
 			rememberMe: $('#rememberMe').is(':checked'),
-			backurl: BACK_URL
 		},
 		beforeSend: function() {
 

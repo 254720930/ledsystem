@@ -12,8 +12,8 @@ public class AdminServiceImp implements AdminService {
     @Autowired
     AdminMapper adminMapper;
     @Override
-    public int login(Admin admin) {
-        int result = adminMapper.login(admin);
-        return result>0? 1:0;
+    public String login(Admin admin) {
+        return adminMapper.login(admin);
+
     }
 }

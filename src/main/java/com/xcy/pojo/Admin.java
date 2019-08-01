@@ -2,9 +2,18 @@ package com.xcy.pojo;
 
 public class Admin {
     private int id;
-    private String adminName;
+    private String username;
     private String password;
     private String email;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public Admin() {
     }
@@ -17,12 +26,13 @@ public class Admin {
         this.id = id;
     }
 
-    public String getAdminName() {
-        return adminName;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setAdminName(String adminName) {
-        this.adminName = adminName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -45,9 +55,10 @@ public class Admin {
     public String toString() {
         return "Admin{" +
                 "id=" + id +
-                ", adminName='" + adminName + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }

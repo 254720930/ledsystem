@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface AdminMapper {
-    int login(Admin admin);
+    String login(Admin admin);
 }
