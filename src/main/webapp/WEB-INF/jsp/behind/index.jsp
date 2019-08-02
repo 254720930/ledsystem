@@ -175,46 +175,55 @@
                 <a class="waves-effect" href="javascript:Tab.addTab('首页', 'home');"><i class="zmdi zmdi-home"></i> 首页</a>
             </li>
             <li class="sub-menu system_menus system_1 0">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 系统组织管理</a>
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 客户留言管理 </a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('系统管理', '${pageContext.request.contextPath}/admin/crud');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('组织管理', 'crud.html');">系统管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('系统管理', '${pageContext.request.contextPath}/message/clientMessage');">系统管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('系统管理', '${pageContext.request.contextPath}/message/hiring');">招聘信息管理</a></li>
+
                 </ul>
             </li>
+            <li class="sub-menu system_menus system_1 1">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 客户留言管理 </a>
+                <ul>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('客户留言管理', '${pageContext.request.contextPath}/solution/solutionList');">客户留言管理</a></li>
+                </ul>
+            </li>
+
+
             <li class="sub-menu system_menus system_1 3">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts"></i> 角色用户管理</a>
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts"></i> 新闻资讯管理</a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('角色管理', 'crud.html');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('用户管理', 'crud.html');">系统管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('公司新闻', '${pageContext.request.contextPath}/news/companyNews');">公司新闻</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('案例新闻', '${pageContext.request.contextPath}/news/caseNews');">案例新闻</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('媒体报道', '${pageContext.request.contextPath}/news/mediaCoverage');">媒体报道</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('视频中心', '${pageContext.request.contextPath}/news/videoCenter');">视频中心</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('资料下载', '${pageContext.request.contextPath}/news/dataDownload');">资料下载</a></li>
                 </ul>
             </li>
-            <li class="sub-menu system_menus system_1 6">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-lock-outline"></i> 权限资源管理</a>
+
+
+            <li class="sub-menu system_menus system_1 1">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 商品管理 </a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('权限管理', 'crud.html');">系统管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('商品管理', '${pageContext.request.contextPath}/goods/show');">商品管理</a></li>
                 </ul>
             </li>
-            <li class="sub-menu system_menus system_1 7">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-more"></i> 其他数据管理</a>
+            <li class="sub-menu system_menus system_2 13">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-menu"></i>工程案例</a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('公共码表', 'crud.html');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('会话管理', 'crud.html');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('日志记录', 'crud.html');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('键值设置', 'crud.html');">系统管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('工程案例', '${pageContext.request.contextPath}/project/case');">工程案例</a></li>
+
                 </ul>
             </li>
-            <li class="sub-menu system_menus system_2 12" style="display:none;">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-menu"></i> 标签类目管理</a>
+
+            <li class="sub-menu system_menus system_2 15">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-collection-text"></i> 公司信息管理</a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('标签管理', 'crud.html');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('类目管理', 'crud.html');">系统管理</a></li>
-                </ul>
-            </li>
-            <li class="sub-menu system_menus system_2 15" style="display:none;">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-collection-text"></i> 文章内容管理</a>
-                <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('文章管理', 'crud.html');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', 'crud.html');">系统管理</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('文章管理', '${pageContext.request.contextPath}/company/info');">公司信息</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">发展历程</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">员工专区</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">专题活动</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">荣誉资质</a></li>
                 </ul>
             </li>
             <li>

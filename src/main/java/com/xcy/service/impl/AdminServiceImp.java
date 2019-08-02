@@ -1,4 +1,4 @@
-package com.xcy.service.serviceImp;
+package com.xcy.service.impl;
 
 import com.xcy.mapper.AdminMapper;
 import com.xcy.pojo.Admin;

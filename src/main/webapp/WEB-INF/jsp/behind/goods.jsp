@@ -77,7 +77,6 @@
         // bootstrap table初始化
         // http://bootstrap-table.wenzhixin.net.cn/zh-cn/documentation/
         $table.bootstrapTable({
-            url: '${pageContext.request.contextPath}/data/data1.json',
             height: getHeight(),
             striped: true,
             search: true,
@@ -107,22 +106,34 @@
             columns: [
                 {field: 'state', checkbox: true},
                 {field: 'id', title: '编号', sortable: true, halign: 'center'},
-                {field: 'username', title: '账号', sortable: true, halign: 'center'},
-                {field: 'password', title: '密码', sortable: true, halign: 'center'},
-                {field: 'name', title: '姓名', sortable: true, halign: 'center'},
-                {field: 'sex', title: '性别', sortable: true, halign: 'center'},
-                {field: 'age', title: '年龄', sortable: true, halign: 'center'},
-                {field: 'phone', title: '手机', sortable: true, halign: 'center'},
-                {field: 'email', title: '邮箱', sortable: true, halign: 'center'},
-                {field: 'address', title: '地址', sortable: true, halign: 'center'},
-                {field: 'remark', title: '备注', sortable: true, halign: 'center'},
+                {field: 'goodsName', title: '商品名称', sortable: true, halign: 'center'},
+                {field: 'goodsModel', title: '商品型号', sortable: true, halign: 'center'},
+                {field: 'goodsType', title: '商品类型', sortable: true, halign: 'center'},
+                {field: 'goodsImgUrl', title: '图片地址', sortable: true, halign: 'center'},
+                {field: 'pixelPitch', title: '像素焦距', sortable: true, halign: 'center'},
+                {field: 'goodsParametersImgUrl', title: '产品参数图片', sortable: true, halign: 'center'},
+                {field: 'goodsFeature', title: '产品特点', sortable: true, halign: 'center'},
                 {field: 'action', title: '操作', halign: 'center', align: 'center', formatter: 'actionFormatter', events: 'actionEvents', clickToSelect: false}
             ]
         }).on('all.bs.table', function (e, name, args) {
             $('[data-toggle="tooltip"]').tooltip();
             $('[data-toggle="popover"]').popover();
         });
-        var data1 = ${goodsList}
+        var data1 = [
+            <c:forEach items="${goodsList}" var="goods" varStatus="var">
+
+            {
+                "id": ${goods.id},
+                "goodsName": '${goods.goodsName}',
+                "goodsModel": '${goods.goodsModel}',
+                "goodsType": '${goods.goodsType}',
+                "goodsImgUrl": '${goods.goodsImgUrl}',
+                "pixelPitch": '${goods.pixelPitch}',
+                "goodsParametersImgUrl": '${goods.goodsParametersImgUrl}',
+                "goodsFeature": '${goods.goodsFeature}'
+            },
+            </c:forEach>
+        ];
         $table.bootstrapTable('load',data1);
     });
     function actionFormatter(value, row, index) {
