@@ -26,14 +26,6 @@ public class GoodsController {
     @Autowired
     GoodsService goodsService;
 
-    @RequestMapping("goodsList")
-    @ResponseBody
-    public List<Goods> goodsList(Model model){
-        List<Goods> goodsList = goodsService.selectGoosList();
-
-        return goodsList;
-    }
-
     @RequestMapping("show")
     public String show(Model model){
         List<Goods> goodsList = goodsService.selectGoosList();
