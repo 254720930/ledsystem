@@ -15,7 +15,8 @@
 
 </head>
 <body>
-    
+
+
     <!--top-->
         <div class="header">
         <h3 class="logo"><a href="index.html"></a></h3>
@@ -199,8 +200,8 @@
                </div>
                <script type="text/javascript" src="Script/slideBox.js"></script>
                <script type="text/javascript" language="javascript">jQuery(".Product_info").slide({mainCell:".bgPic ul",autoPlay:false,delayTime:3000});</script>
-               <h4>户外表贴全彩系列<span>（产品型号：A05215665）</span></h4>
-               <dl>户外运动场LED广告屏<br />包括：8mm、10mm、16mm等产品</dl>
+               <h4 id="goodsName"></h4>
+               <dl id="goodsType"></dl>
                <div class="btn">
                     <a class="a1" href="#">在线咨询</a>
                     <a class="a2" href="newsDown.html">产品资料下载</a>
@@ -271,22 +272,8 @@
           </div>
           <!--产品参数 End-->
           <!--产品特点-->
-          <div class="Product_features">
-               <h4 class="Product_title"><span>产品特点</span></h4>
-               <div class="box">
-                      <p><b>1.出众的画面表现力</b><br />
-                      较小的点间距和16bit的色彩表现力以及灰度等级给观众提供了如水晶般清晰的画质，带来全新的视觉体验。
-                      精心挑选的SMD灯管确保了水平方向和垂直方向上都达到120度的视角。
-                      </p>
-                      <p><b>2.画面清晰无闪烁</b><br />
-                      高达4200赫兹的刷新频率提供了精确无闪的画面输出。</p>
-                      <p><b>3.先进的LED技术</b><br />
-                      锐拓的逐点矫正技术可以基于每个灯管调整显示屏的整体亮度和色度，这有利于减小不同灯管之间亮度和色度的差别，
-                      提高显示屏色彩的均匀性。此外区别于其他的竞争对手，我们的逐点矫正技术不基于任何现有的系统设计因此有更加广泛的用途。</p>
-                      <p><b>4.出色的环境适应性</b><br />
-                      显示屏亮度高达6000，并且可以根据周围环境光线的变化自动调整，重新设计的模组面罩有效地提高了显示屏的对比度达到6000：1
-                      防水设计：前防水IP65后防水IP43</p>
-               </div>
+          <div class="Product_features" id="goodsFeature">
+
           </div>
           <!--产品特点 End-->
     
@@ -385,6 +372,21 @@
     
     <script type="text/javascript" language="javascript">
         jQuery("#nav4 a").attr("class","acur");
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            $.ajax({
+                url : "/ledsys/goods/showGoods",
+                type : "POSt",
+                data : {"id":1},
+                success : function (goods) {
+                    $("#goodsName").html(goods.goodsName + "<span>（产品型号："+goods.goodsModel+"）</span>");
+                    $("#goodsType").html(goods.goodsType + "<br />包括：8mm、10mm、16mm等产品");
+                    $("#goodsFeature").html("<h4 class=\"Product_title\"><span>产品特点</span></h4>\n<div class=\"box\">\n" + goods.goodsFeature + "</div>");
+                }
+            });
+        })
+
     </script>
     
 </body>

@@ -19,17 +19,15 @@ import java.util.List;
  * @Description:
  * @version: 1.0
  */
-@Controller
+@RestController
 @RequestMapping("goods")
 public class GoodsController {
 
     @Autowired
     GoodsService goodsService;
 
-    @RequestMapping("show")
-    public String show(Model model){
-        List<Goods> goodsList = goodsService.selectGoosList();
-        model.addAttribute(goodsList);
-        return "behind/goods";
+    @RequestMapping("showGoods")
+    public Goods show(int id){
+        return goodsService.selectGoosListById(id);
     }
 }

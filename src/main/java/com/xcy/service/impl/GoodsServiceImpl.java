@@ -20,9 +20,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     GoodsMapper goodsMapper;
 
-
     @Override
-    public List<Goods> selectGoosList() {
-        return goodsMapper.selectGoosList();
+    public Goods selectGoosListById(int id) {
+        return goodsMapper.selectGoosListById(id);
     }
 }

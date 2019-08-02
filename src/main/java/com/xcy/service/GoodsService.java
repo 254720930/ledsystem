@@ -12,6 +12,6 @@ import java.util.List;
  */
 
 public interface GoodsService {
-    List<Goods> selectGoosList();
 
+    Goods selectGoosListById(int id);
 }

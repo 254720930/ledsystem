@@ -13,6 +13,6 @@ import java.util.List;
  */
 @Mapper
 public interface GoodsMapper {
-    List<Goods> selectGoosList();
 
+    Goods selectGoosListById(int id);
 }

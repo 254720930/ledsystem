@@ -3,8 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xcy.mapper.GoodsMapper">
-
-    <select id="selectGoosList" resultType="com.xcy.pojo.Goods">
-        select * from Goods
+    <select id="selectGoosListById" resultType="com.xcy.pojo.Goods" parameterType="int">
+        select * from goods where id = #{id};
     </select>
 </mapper>
