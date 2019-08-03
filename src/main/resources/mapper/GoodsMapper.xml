@@ -7,7 +7,7 @@
         select g1.*,g2.goodsType from goods g1 left join goods_type g2 on g1.goodsTypeId = g2.id where g1.id = #{id};
     </select>
     <select id="selectGoodsList" resultType="com.xcy.pojo.Goods" parameterType="int">
-        select * from goods where goodsTypeId = #{goodsTypeId}
+       select g1.*,g2.goodsType from goods g1 left join goods_type g2 on g1.goodsTypeId = g2.id where goodsTypeId = #{goodsTypeId}
     </select>
     <select id="selectGoodsType" resultType="com.xcy.pojo.GoodsType">
         select * from goods_type

@@ -26,4 +26,12 @@ public class GoodsType {
     public void setGoodsType(String goodsType) {
         this.goodsType = goodsType;
     }
+
+    @Override
+    public String toString() {
+        return "GoodsType{" +
+                "id=" + id +
+                ", goodsType='" + goodsType + '\'' +
+                '}';
+    }
 }
