@@ -1,8 +1,10 @@
 package com.xcy.service;
 
 import com.xcy.pojo.Goods;
+import com.xcy.pojo.GoodsType;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: http://www/qfedu.com
@@ -13,5 +15,7 @@ import java.util.List;
 
 public interface GoodsService {
 
-    Goods selectGoosListById(int id);
+    Goods selectGoodsById(int id);
+
+    Map<GoodsType,List<Goods>> selectGoodsList();
 }

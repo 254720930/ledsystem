@@ -5,8 +5,9 @@
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <meta name="Author" content="">
 <title></title>
-<link href="css/css_whir.css" rel="stylesheet" type="text/css" />
+    <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
 <script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="./js/axios.min.js"></script>
 <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -183,20 +184,14 @@
           <!--产品详细-->
           <div class="Product_info">
                <div class="bgPic">
-               <ul>
-                       <li><img src="images/temp/P7.jpg" /></li>
-                       <li><img src="images/temp/P6.jpg" /></li>
-                       <li><img src="images/temp/P5.jpg" /></li>
-                       <li><img src="images/temp/P4.jpg" /></li>
-               </ul>
+                    <ul id="goodsImgUrl1">
+
+                    </ul>
                </div>
                <div class="hd">
-               <ul>
-                       <li><img src="images/temp/P7.jpg" /></li>
-                       <li><img src="images/temp/P6.jpg" /></li>
-                       <li><img src="images/temp/P5.jpg" /></li>
-                       <li><img src="images/temp/P4.jpg" /></li>
-               </ul>
+                    <ul id="goodsImgUrl2">
+
+                    </ul>
                </div>
                <script type="text/javascript" src="Script/slideBox.js"></script>
                <script type="text/javascript" language="javascript">jQuery(".Product_info").slide({mainCell:".bgPic ul",autoPlay:false,delayTime:3000});</script>
@@ -268,7 +263,8 @@
           <!--产品参数-->
           <div class="Product_parameter">
                <h4 class="Product_title"><span>产品参数</span></h4>
-               <div class="box"><img src="images/temp/P8.jpg" /></div>
+               <div class="box" id="goodsParametersImgUrl">
+               </div>
           </div>
           <!--产品参数 End-->
           <!--产品特点-->
@@ -369,7 +365,7 @@
      </div>
      
     <!--Bottom End-->
-    
+
     <script type="text/javascript" language="javascript">
         jQuery("#nav4 a").attr("class","acur");
     </script>
@@ -383,11 +379,24 @@
                     $("#goodsName").html(goods.goodsName + "<span>（产品型号："+goods.goodsModel+"）</span>");
                     $("#goodsType").html(goods.goodsType + "<br />包括：8mm、10mm、16mm等产品");
                     $("#goodsFeature").html("<h4 class=\"Product_title\"><span>产品特点</span></h4>\n<div class=\"box\">\n" + goods.goodsFeature + "</div>");
+                    $("#goodsParametersImgUrl").html("<img src=\""+goods.goodsParametersImgUrl+"\"/>");
+                    /*$("#goodsImgUrl1").html(
+                        $(goods).each(
+                            alert("1111111");
+                            <li><img src="" + this.goodsImg + "" /></li>
+                        );
+                    )*/
+                    /*$("#goodsImgUrl2").html("<ul>\n" +
+                        "                       <li><img src=\"http://localhost:8081/images/temp/P7.jpg\" /></li>\n" +
+                        "                       <li><img src=\"http://localhost:8081/images/temp/P6.jpg\" /></li>\n" +
+                        "                       <li><img src=\"http://localhost:8081/images/temp/P5.jpg\" /></li>\n" +
+                        "                       <li><img src=\"http://localhost:8081/images/temp/P4.jpg\" /></li>\n" +
+                        "               </ul>");*/
                 }
             });
         })
 
     </script>
-    
+
 </body>
 </html>

@@ -130,7 +130,8 @@
                 "goodsImgUrl": '${goods.goodsImgUrl}',
                 "pixelPitch": '${goods.pixelPitch}',
                 "goodsParametersImgUrl": '${goods.goodsParametersImgUrl}',
-                "goodsFeature": '${goods.goodsFeature}'
+                "goodsFeature": '${goods.goodsFeature}',
+                "goodsImg":'${goods.goodsImg}'
             },
             </c:forEach>
         ];

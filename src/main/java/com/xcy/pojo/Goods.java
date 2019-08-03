@@ -1,5 +1,7 @@
 package com.xcy.pojo;
 
+import java.util.List;
+
 /**
  * @Auther: http://www/qfedu.com
  * @Date: 2019/8/1
@@ -12,14 +14,31 @@ public class Goods {
     private String goodsName;
     private String goodsModel;
     private String goodsType;
+    private String goodsTypeId;
     private String goodsImgUrl;
     private String pixelPitch;
     private String goodsParametersImgUrl;
     private String goodsFeature;
+    private List<String> goodsImg;
 
+    public void setGoodsImg(List<String> goodsImg) {
+        this.goodsImg = goodsImg;
+    }
+
+    public List<String> getGoodsImg() {
+        return goodsImg;
+    }
 
     public int getId() {
         return id;
+    }
+
+    public String getGoodsTypeId() {
+        return goodsTypeId;
+    }
+
+    public void setGoodsTypeId(String goodsTypeId) {
+        this.goodsTypeId = goodsTypeId;
     }
 
     public void setId(int id) {

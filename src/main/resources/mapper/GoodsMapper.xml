@@ -3,7 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xcy.mapper.GoodsMapper">
-    <select id="selectGoosListById" resultType="com.xcy.pojo.Goods" parameterType="int">
-        select * from goods where id = #{id};
+    <select id="selectGoodsById" resultType="com.xcy.pojo.Goods" parameterType="int">
+        select g1.*,g2.goodsType from goods g1 left join goods_type g2 on g1.goodsTypeId = g2.id where g1.id = #{id};
+    </select>
+    <select id="selectGoodsList" resultType="com.xcy.pojo.Goods" parameterType="int">
+        select * from goods where goodsTypeId = #{goodsTypeId}
+    </select>
+    <select id="selectGoodsType" resultType="com.xcy.pojo.GoodsType">
+        select * from goods_type
     </select>
 </mapper>
