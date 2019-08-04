@@ -5,13 +5,84 @@
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <meta name="Author" content="">
 <title></title>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/css.css">
+<link href="css/video-js.css" rel="stylesheet" type="text/css">
 <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
-<script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="Script/jquery-2.1.0.min.js" type="text/javascript"></script>
 <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
+<script type="text/javascript">
 
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var id = GetQueryString("videoId");
+    $.get("video/getVideoById/"+id,null,function (data) {
+        //alert(data.videoTypeId);
+        if(data.videoTypeId == "" || data.videoTypeId == null){
+            $("#navId1").attr("class","acur");
+        }
+        if (data.videoTypeId == 1){
+            $("#navId2").attr("class","acur");
+        }
+        if(data.videoTypeId == 2){
+            $("#navId3").attr("class","acur");
+        }
+        if(data.videoTypeId == 3){
+            $("#navId4").attr("class","acur");
+        }
+        if(data.videoTypeId == 4){
+            $("#navId5").attr("class","acur");
+        }
+        if(data.videoTypeId == 5){
+            $("#navId6").attr("class","acur");
+        }
+        if(data.videoTypeId == 6){
+            $("#navId7").attr("class","acur");
+        }
+        if(data.videoTypeId == 7){
+            $("#navId8").attr("class","acur");
+        }
+
+
+        $("#videoTitleId").html(data.videoTitle);
+        $("#videoPlayer").attr("src",data.videoUrl);
+        $("#videoPlayer").attr("poster",data.videoImageUrl);
+        $(".Info_txt").html(data.videoContent);
+        $(".Info_back a").attr("href","newsVideo.html?videoTypeId="+data.videoTypeId);
+
+        if(data.lastVideo != null){
+            $("#lastInfo").html("上一篇："+data.lastVideo.videoTitle);
+            $("#lastInfo").attr("href","newsVideoInfo.html?videoId="+data.lastVideo.videoId);
+        }
+
+        if(data.nextVideo != null){
+            $("#nextInfo").html("下一篇："+data.nextVideo.videoTitle);
+            $("#nextInfo").attr("href","newsVideoInfo.html?videoId="+data.nextVideo.videoId);
+        }
+        if (data.relaVideo != null){
+            for(var i = data.relaVideo.length;6 > i;i++){
+                var j = i+1;
+                $("#liId"+j).remove();
+            }
+            $.each(data.relaVideo,function (index,obj) {
+                var num = index+1;
+                console.log(num);
+                $("#liId"+num+" a").attr("href","newsVideoInfo.html?videoId="+obj.videoId);
+                $("#liId"+num+" img").attr("src",obj.videoImageUrl);
+                $("#liId"+num+" span").html(obj.videoTv);
+            });
+        }
+
+    });
+
+</script>
 
 </head>
 <body>
@@ -45,9 +116,9 @@
                     <li id="nav3"><span><a href="newsIndex.html">新闻资讯</a></span>
                          <div class="sub">
                                 <dl>
-                                       <a href="news.html">公司新闻</a>
-                                       <a href="news.html">案例新闻</a>
-                                       <a href="news.html">媒体报道</a>
+                                       <a href="news.html?newsTypeId=1">公司新闻</a>
+                                       <a href="news.html?newsTypeId=2">案例新闻</a>
+                                       <a href="news.html?newsTypeId=3">媒体报道</a>
                                        <a href="newsVideo.html">视频中心</a>
                                        <a href="newsDown.html">资料下载</a>
                                 </dl>
@@ -94,9 +165,9 @@
                         <div class="Menu">
                     <h4 class="Nav">新闻资讯<span>news</span></h4>
                     <ul class="about">
-                           <li id="menu1"><a href="news.html">公司新闻</a></li>
-                           <li id="menu2"><a href="news.html">案例新闻</a></li>
-                           <li id="menu3"><a href="news.html">媒体报道</a></li>
+                           <li id="menu1"><a href="news.html?newsTypeId=1">公司新闻</a></li>
+                           <li id="menu2"><a href="news.html?newsTypeId=2">案例新闻</a></li>
+                           <li id="menu3"><a href="news.html?newsTypeId=3">媒体报道</a></li>
                            <li id="menu4"><a href="newsVideo.html">视频中心</a></li>
                            <li id="menu5"><a href="newsDown.html">资料下载</a></li>
                     </ul>
@@ -112,58 +183,46 @@
           <div class="mianContent">
           
                  <!--Star-->
-                                  <div class="Menu_sub">
+                 <div class="Menu_sub">
                      <ul>
-                             <li id="navId1"><a href="#">所有视频</a></li>
-                             <li id="navId2"><a href="#">新闻视频</a></li>
-                             <li id="navId3"><a href="#">宣传片</a></li>
-                             <li id="navId4"><a href="#">服务视频</a></li>
-                             <li id="navId5"><a href="#">产品视频</a></li>
-                             <li id="navId6"><a href="#">活动视频</a></li>
-                             <li id="navId7"><a href="#">培训视频</a></li>
-                             <li id="navId8"><a href="#">微电影</a></li>
+                         <li id="navId1"><a href="newsVideo.html">所有视频</a></li>
+                         <li id="navId2"><a href="newsVideo.html?videoTypeId=1">新闻视频</a></li>
+                         <li id="navId3"><a href="newsVideo.html?videoTypeId=2">宣传片</a></li>
+                         <li id="navId4"><a href="newsVideo.html?videoTypeId=3">服务视频</a></li>
+                         <li id="navId5"><a href="newsVideo.html?videoTypeId=4">产品视频</a></li>
+                         <li id="navId6"><a href="newsVideo.html?videoTypeId=5">活动视频</a></li>
+                         <li id="navId7"><a href="newsVideo.html?videoTypeId=6">培训视频</a></li>
+                         <li id="navId8"><a href="newsVideo.html?videoTypeId=7">微电影</a></li>
                      </ul>
                  </div>
                  <div class="Video_info">
-                       <h5>深圳卫视财经频道《创业资本圈》栏目——锐拓显示董事</h5>
-                       <div class="big"><img src="images/temp/News_p5.jpg" width="570" height="440" /></div>
+                       <h2 style="text-align: center;font-size: large" id="videoTitleId"></h2>
+                       <div class="big">
+                           <video id="videoPlayer" class="video-js vjs-default-skin" controls width="570" height="440" data-setup="{}"></video>
+                       </div>
                        <div class="frCont">
-                            <h4>关联视频</h4>
-                            <div class="box">
-                                  <ul>
-                                         <li><a href="#"><img src="images/temp/News_p1.jpg" /><span>深圳卫视``财经频道</span></a></li>
-                                         <li><a href="#"><img src="images/temp/News_p2.jpg" /><span>深圳卫视``财经频道</span></a></li>
-                                         <li><a href="#"><img src="images/temp/News_p3.jpg" /><span>深圳卫视``财经频道</span></a></li>
-                                         <li><a href="#"><img src="images/temp/News_p4.jpg" /><span>深圳卫视``财经频道</span></a></li>
-                                         <li><a href="#"><img src="images/temp/News_p3.jpg" /><span>深圳卫视``财经频道</span></a></li>
-                                         <li><a href="#"><img src="images/temp/News_p4.jpg" /><span>深圳卫视``财经频道</span></a></li>
-                                  </ul>
-                            </div>
-                            <div class="hd"><a class="prev"></a><a class="next"></a></div>
-                            <script type="text/javascript" src="Script/slideBox.js"></script>
-                            <script type="text/javascript" language="javascript">jQuery(".frCont").slide({titCell:".hd ul",mainCell:".box ul",autoPage:true,effect:"top",autoPlay:true,vis:3});</script>
+                           <h4>关联视频</h4>
+                           <div class="box">
+                               <ul id="relaVideoId">
+                                   <li id="liId1"><a><img /><span></span></a></li>
+                                   <li id="liId2"><a><img /><span></span></a></li>
+                                   <li id="liId3"><a><img /><span></span></a></li>
+                                   <li id="liId4"><a><img /><span></span></a></li>
+                                   <li id="liId5"><a><img /><span></span></a></li>
+                                   <li id="liId6"><a><img /><span></span></a></li>
+                               </ul>
+                           </div>
+                           <div class="hd"><a class="prev"></a><a class="next"></a></div>
+                           <script type="text/javascript" src="Script/slideBox.js"></script>
+                           <script type="text/javascript" language="javascript">jQuery(".frCont").slide({titCell:".hd ul",mainCell:".box ul",autoPage:true,effect:"top",autoPlay:true,vis:3});</script>
+
                        </div>
                  </div>
-                 <div class="Info_txt">
-                      <p>走进21世纪，我们迎来了一个前所未有的能源变革时代，此时中国公用事业的改革开放，为投身燃气行业的创业者搭建了一个充满活力的舞台。</p>
-                      <p>2002年至今，中国燃气走过了十个春秋。十年艰苦创业，中国燃气凭着激情与梦想、
-                      责任与忠诚，转战大江南北，通过苦心经营，一跃成为拥有近300家下属公司的综合能
-                      源服务商，打造了一套独具特色的管理体系、企业文化和商业模式，奏响了
-                      创业梦想的开篇曲。多少艰难困苦、多少不眠之夜，仿佛就发生在昨天。</p>
-                      <p>中国燃气的十年，是将梦想逐步化为现实的十年。在创业伊始我们就明确了为社会提供最优
-                      服务的目标，并坚信我们所从事的燃气事业具有强大的生命力。在理想与信念的支撑下，我们
-                      顺应天下大势，聚集天下志士，谋得了中国燃气的持续快速成长，现已成为集城市管道燃气、
-                      液化石油气和车船燃气销售为一体的大型燃气集团。</p>
-                      <p>回顾过去，中国燃气的十年创业历程，记录的是梦想、激情和超越；展望未来，引领中国燃气发展的依然是梦想、激情
-                      与超越。共同的价值观、实现梦想的信念与勇气、“咬定青山不放松”的执着精神，给我们注入了源源不断的创业
-                      激情。我们将依托十年来所积淀的资金、技术、人才、管理等诸多优势资源，让我们的梦想更加远大，奋斗
-                      的脚步更加坚实。未来十年、二十年，甚至一百年，中国燃气都要不断超越自我、攀登新高峰。</p>
-                 </div>
-                 <h5 class="Info_back"><a href="#">返 回</a></h5>
-                 <dl class="Info_page"><a href="#">上一篇：携手世界五百强商业企业及国内外知名商家...</a></dl>
-                 <dl class="Info_page"><a href="#">下一篇：玩转“雅天科技”微博,拿无线耳机大奖...</a></dl>
+                 <div class="Info_txt"></div>
+                 <h5 class="Info_back"><a>返 回</a></h5>
+                 <dl class="Info_page"><a id="lastInfo"></a></dl>
+                 <dl class="Info_page"><a id="nextInfo"></a></dl>
                  <!--End-->
-                 
           </div>
           </div>
           <!--右边 End-->
@@ -264,7 +323,6 @@
     <script type="text/javascript" language="javascript">
         jQuery("#nav3 a").attr("class","acur");
 		jQuery("#menu4").attr("class","acur");
-		jQuery("#navId1").attr("class","acur");
     </script>
     
 </body>

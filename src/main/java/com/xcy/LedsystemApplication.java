@@ -16,10 +16,10 @@ public class LedsystemApplication {
     }
 
     @Value("${spring.redis.host}")
-    String host ;
+    String host;
 
     @Value("${spring.redis.port}")
-    int port ;
+    int port;
 
 
     @Bean  // <bean id='' class=“”/>

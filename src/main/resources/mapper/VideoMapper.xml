@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.VideoMapper">
+    <resultMap id="videoResultMap" type="com.xcy.pojo.Video">
+        <id property="videoId" column="video_id"></id>
+        <result property="videoContent" column="video_content"></result>
+        <result property="videoImageUrl" column="video_image_url"></result>
+        <result property="videoPlayNum" column="video_play_num"></result>
+        <result property="videoPublishTime" column="video_publish_time"></result>
+        <result property="videoTv" column="video_tv"></result>
+        <result property="videoTitle" column="video_title"></result>
+        <result property="videoTypeId" column="video_type_id"></result>
+        <result property="videoUrl" column="video_url"></result>
+    </resultMap>
+
+    <select id="getVideoByTypeId" parameterType="int" resultMap="videoResultMap">
+        select video_id,video_image_url,video_publish_time,video_tv from video
+        <where>
+            <if test="_parameter != 0">
+                video_type_id = #{id}
+            </if>
+        </where>
+        order by video_publish_time desc
+    </select>
+
+    <select id="sortVideoByPlayNum" parameterType="int" resultMap="videoResultMap">
+        select video_id,video_image_url,video_publish_time,video_tv from video
+        <where>
+            <if test="_parameter != 0">
+                video_type_id = #{id}
+            </if>
+        </where>
+        order by video_play_num desc
+    </select>
+
+    <select id="getVideoById" parameterType="int" resultMap="videoResultMap">
+        select * from video where video_id = #{id}
+    </select>
+
+    <select id="getLastVideo" resultMap="videoResultMap">
+        select video_id,video_title from video where video_type_id = #{param1} AND video_publish_time >= #{param2} AND video_id != #{param3}
+        ORDER BY ABS(video_publish_time - #{param2}) ASC
+        limit 1
+    </select>
+
+    <select id="getNextVideo" resultMap="videoResultMap">
+        select video_id,video_title from video where video_type_id = #{param1} AND #{param2} >= video_publish_time AND video_id != #{param3}
+        ORDER BY ABS(#{param2} - video_publish_time) ASC
+        limit 1
+    </select>
+
+    <select id="getAllRelaVideo" resultMap="videoResultMap">
+        select video_id,video_image_url,video_tv from video
+        where video_tv = #{param2} AND video_type_id = #{param1}
+        limit 6
+    </select>
+
+    <select id="getAllVideoByLimit" resultMap="videoResultMap">
+        select video_id,video_image_url from video
+        limit 4
+    </select>
+</mapper>

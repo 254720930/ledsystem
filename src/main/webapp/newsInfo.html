@@ -11,7 +11,40 @@
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-
+<script type="text/javascript">
+    $(function () {
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+        var id = GetQueryString("newsId");
+        $.get("news/getNewsById/"+id,null,function (data) {
+            if (data.newsTypeId == 1){
+                jQuery("#menu1").attr("class","acur");
+            }
+            if(data.newsTypeId == 2){
+                jQuery("#menu2").attr("class","acur");
+            }
+            if(data.newsTypeId == 3){
+                jQuery("#menu3").attr("class","acur");
+            }
+            $(".Info_title").html(data.newsTitle);
+            $(".Info_time").html("发布时间："+data.newsPublishTime);
+            $(".Info_txt").html(data.newsContent);
+            $(".Info_back a").attr("href","news.html?newsTypeId="+data.newsTypeId);
+            if(data.lastNews.newsTitle != "" && data.lastNews.newsTitle != null){
+                $("#lastInfo").html("上一篇："+data.lastNews.newsTitle);
+                $("#lastInfo").attr("href","newsInfo.html?newsId="+data.lastNews.newsId);
+            }
+            if(data.nextNews.newsTitle != "" && data.nextNews.newsTitle != null){
+                $("#nextInfo").html("下一篇："+data.nextNews.newsTitle);
+                $("#nextInfo").attr("href","newsInfo.html?newsId="+data.nextNews.newsId);
+            }
+        });
+    });
+</script>
 
 </head>
 <body>
@@ -45,9 +78,9 @@
                     <li id="nav3"><span><a href="newsIndex.html">新闻资讯</a></span>
                          <div class="sub">
                                 <dl>
-                                       <a href="news.html">公司新闻</a>
-                                       <a href="news.html">案例新闻</a>
-                                       <a href="news.html">媒体报道</a>
+                                       <a href="news.html?newsTypeId=1">公司新闻</a>
+                                       <a href="news.html?newsTypeId=2">案例新闻</a>
+                                       <a href="news.html?newsTypeId=3">媒体报道</a>
                                        <a href="newsVideo.html">视频中心</a>
                                        <a href="newsDown.html">资料下载</a>
                                 </dl>
@@ -94,9 +127,9 @@
                         <div class="Menu">
                     <h4 class="Nav">新闻资讯<span>news</span></h4>
                     <ul class="about">
-                           <li id="menu1"><a href="news.html">公司新闻</a></li>
-                           <li id="menu2"><a href="news.html">案例新闻</a></li>
-                           <li id="menu3"><a href="news.html">媒体报道</a></li>
+                           <li id="menu1"><a href="news.html?newsTypeId=1">公司新闻</a></li>
+                           <li id="menu2"><a href="news.html?newsTypeId=2">案例新闻</a></li>
+                           <li id="menu3"><a href="news.html?newsTypeId=3">媒体报道</a></li>
                            <li id="menu4"><a href="newsVideo.html">视频中心</a></li>
                            <li id="menu5"><a href="newsDown.html">资料下载</a></li>
                     </ul>
@@ -112,26 +145,13 @@
           <div class="mianContent">
           
                  <!--Star-->
-                 <h5 class="Info_title">带可充电发射机座 测雅天影音无线耳机</h5>
-                 <h6 class="Info_time">发布时间：2013-2-28 15:30:56</h6>
+                 <h5 class="Info_title"></h5>
+                 <h6 class="Info_time"></h6>
                  <div class="Info_txt">
-                      <p>走进21世纪，我们迎来了一个前所未有的能源变革时代，此时中国公用事业的改革开放，为投身燃气行业的创业者搭建了一个充满活力的舞台。</p>
-                      <p>2002年至今，中国燃气走过了十个春秋。十年艰苦创业，中国燃气凭着激情与梦想、
-                      责任与忠诚，转战大江南北，通过苦心经营，一跃成为拥有近300家下属公司的综合能
-                      源服务商，打造了一套独具特色的管理体系、企业文化和商业模式，奏响了
-                      创业梦想的开篇曲。多少艰难困苦、多少不眠之夜，仿佛就发生在昨天。</p>
-                      <p>中国燃气的十年，是将梦想逐步化为现实的十年。在创业伊始我们就明确了为社会提供最优
-                      服务的目标，并坚信我们所从事的燃气事业具有强大的生命力。在理想与信念的支撑下，我们
-                      顺应天下大势，聚集天下志士，谋得了中国燃气的持续快速成长，现已成为集城市管道燃气、
-                      液化石油气和车船燃气销售为一体的大型燃气集团。</p>
-                      <p>回顾过去，中国燃气的十年创业历程，记录的是梦想、激情和超越；展望未来，引领中国燃气发展的依然是梦想、激情
-                      与超越。共同的价值观、实现梦想的信念与勇气、“咬定青山不放松”的执着精神，给我们注入了源源不断的创业
-                      激情。我们将依托十年来所积淀的资金、技术、人才、管理等诸多优势资源，让我们的梦想更加远大，奋斗
-                      的脚步更加坚实。未来十年、二十年，甚至一百年，中国燃气都要不断超越自我、攀登新高峰。</p>
                  </div>
                  <h5 class="Info_back"><a href="#">返 回</a></h5>
-                 <dl class="Info_page"><a href="#">上一篇：携手世界五百强商业企业及国内外知名商家...</a></dl>
-                 <dl class="Info_page"><a href="#">下一篇：玩转“雅天科技”微博,拿无线耳机大奖...</a></dl>
+                 <dl class="Info_page"><a id="lastInfo" href="#"></a></dl>
+                 <dl class="Info_page"><a id="nextInfo" href="#"></a></dl>
                  <!--End-->
                  
           </div>
@@ -233,7 +253,6 @@
     
     <script type="text/javascript" language="javascript">
         jQuery("#nav3 a").attr("class","acur");
-		jQuery("#menu1").attr("class","acur");
     </script>
     
 </body>

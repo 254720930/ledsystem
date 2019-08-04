@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.DataMapper">
+    <resultMap id="dataResultMap" type="com.xcy.pojo.Data">
+        <id property="dataId" column="data_id"></id>
+        <result property="dataTitle" column="data_title"></result>
+        <result property="dataTypeId" column="data_type_id"></result>
+        <result property="dataUploadTime" column="data_upload_time"></result>
+        <result property="downloadUrl" column="download_url"></result>
+        <result property="dataTypeName" column="data_type_name"></result>
+    </resultMap>
+
+    <select id="getAllData" resultMap="dataResultMap">
+        select t.data_type_name,d.data_type_id,d.data_id,d.data_title,d.download_url from data d
+        left join data_type t on d.data_type_id = t.data_type_id
+        order by d.data_upload_time desc
+    </select>
+
+    <select id="getAllDataByLimit" resultMap="dataResultMap">
+        select data_title,download_url from data
+        order by data_upload_time desc
+        limit 9
+    </select>
+</mapper>

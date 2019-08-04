@@ -5,13 +5,141 @@
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <meta name="Author" content="">
 <title></title>
-<link href="css/css_whir.css" rel="stylesheet" type="text/css" />
-<script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="text/javascript" src="layui/layui.js" ></script>
+    <script type="text/javascript" src="js/jquery-1.12.2.min.js" ></script>
 <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
+<script type="text/javascript">
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+        if(r!=null)return  unescape(r[2]); return null;
+    }
 
+    window.temp = 1;
+    function playNum(){
+        $("#playTimeId").removeAttr("class");
+        $("#playNumId").attr("class","on");
+        window.temp = 0;
+        initLayPage();
+    }
+
+    function playTime(){
+        $("#playNumId").removeAttr("class");
+        $("#playTimeId").attr("class","on");
+        window.temp = 1;
+        initLayPage();
+    }
+
+    $(function () {
+        initLayPage();
+    });
+
+    function initLayPage(page,pageSize) {
+        //alert(window.temp);
+        if(page == null || pageSize == null){
+            page = 1;
+            pageSize = 12;
+        }
+        var id = GetQueryString("videoTypeId");
+        if (id == 1){
+            jQuery("#navId2").attr("class","acur");
+        }
+        if(id == 2){
+            jQuery("#navId3").attr("class","acur");
+        }
+        if(id == 3){
+            jQuery("#navId4").attr("class","acur");
+        }
+        if(id == 4){
+            jQuery("#navId5").attr("class","acur");
+        }
+        if(id == 5){
+            jQuery("#navId6").attr("class","acur");
+        }
+        if(id == 6){
+            jQuery("#navId7").attr("class","acur");
+        }
+        if(id == 7){
+            jQuery("#navId8").attr("class","acur");
+        }
+        if(id == null){
+            id = 0;
+            jQuery("#navId1").attr("class","acur");
+        }
+        if (window.temp == 1){
+            $.post("video/getVideoByTypeId/"+id, {"page":page,"pageSize":pageSize}, function (data) {
+                layui.use(['laypage', 'layer'], function () {
+                    var page = layui.laypage;
+                    page.render({
+                        elem: 'pageId',
+                        count: data.total,
+                        curr: data.pageNum,
+                        limit: 12, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                        limits:[12, 24, 36, 48, 60],
+                        first: "首页",
+                        last: "尾页",
+                        layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                        jump: function (obj, first) {
+                            if (!first) {
+                                var num1 = obj.curr;
+                                var num2 = obj.limit;
+                                initLayPage(num1,num2);
+                            }
+                        }
+                    });
+                    var num = (page - 1) * pageSize;
+                    fillUr(data.list, num); //页面填充
+                })
+            });
+        } else if(window.temp == 0){
+            $.post("video/sortVideoByPlayNum/"+id, {"page":page,"pageSize":pageSize}, function (data) {
+                layui.use(['laypage', 'layer'], function () {
+                    var page = layui.laypage;
+                    page.render({
+                        elem: 'pageId',
+                        count: data.total,
+                        curr: data.pageNum,
+                        limit: 12, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                        limits:[12, 24, 36, 48, 60],
+                        first: "首页",
+                        last: "尾页",
+                        layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                        jump: function (obj, first) {
+                            if (!first) {
+                                var num1 = obj.curr;
+                                var num2 = obj.limit;
+                                initLayPage(num1,num2);
+                            }
+                        }
+                    });
+                    var num = (page - 1) * pageSize;
+                    fillUr(data.list, num); //页面填充
+                })
+            });
+        }
+    }
+
+    //填充表格数据
+    function fillUr(data, num) {
+        $("#videoUl").empty();
+        $.each(data, function (index, obj) {
+            // id 很多时候并不是连续的，如果为了显示比较连续的记录数，可以这样根据当前页和每页条数动态的计算记录序号
+            index = index + num + 1;
+            var tv = obj.videoTv;
+            if (tv.length > 15) {
+                tv = obj.videoTv.substring(0, 15) + "...";
+            }
+            var li = "<li><div class='pic'><a href='newsVideoInfo.html?videoId="+obj.videoId+"'><img src='"+obj.videoImageUrl+"' /></a></div><span><a href='newsVideoInfo.html?videoId="+obj.videoId+"'>"+tv+"</a></span><em>"+obj.videoPublishTime+"</em></li>";
+            $("#videoUl").append(li);
+        });
+    }
+</script>
 
 </head>
 <body>
@@ -45,9 +173,9 @@
                     <li id="nav3"><span><a href="newsIndex.html">新闻资讯</a></span>
                          <div class="sub">
                                 <dl>
-                                       <a href="news.html">公司新闻</a>
-                                       <a href="news.html">案例新闻</a>
-                                       <a href="news.html">媒体报道</a>
+                                       <a href="news.html?newsTypeId=1">公司新闻</a>
+                                       <a href="news.html?newsTypeId=2">案例新闻</a>
+                                       <a href="news.html?newsTypeId=3">媒体报道</a>
                                        <a href="newsVideo.html">视频中心</a>
                                        <a href="newsDown.html">资料下载</a>
                                 </dl>
@@ -94,9 +222,9 @@
                         <div class="Menu">
                     <h4 class="Nav">新闻资讯<span>news</span></h4>
                     <ul class="about">
-                           <li id="menu1"><a href="news.html">公司新闻</a></li>
-                           <li id="menu2"><a href="news.html">案例新闻</a></li>
-                           <li id="menu3"><a href="news.html">媒体报道</a></li>
+                           <li id="menu1"><a href="news.html?newsTypeId=1">公司新闻</a></li>
+                           <li id="menu2"><a href="news.html?newsTypeId=2">案例新闻</a></li>
+                           <li id="menu3"><a href="news.html?newsTypeId=3">媒体报道</a></li>
                            <li id="menu4"><a href="newsVideo.html">视频中心</a></li>
                            <li id="menu5"><a href="newsDown.html">资料下载</a></li>
                     </ul>
@@ -114,95 +242,19 @@
                  <!--Star-->
                                   <div class="Menu_sub">
                      <ul>
-                             <li id="navId1"><a href="#">所有视频</a></li>
-                             <li id="navId2"><a href="#">新闻视频</a></li>
-                             <li id="navId3"><a href="#">宣传片</a></li>
-                             <li id="navId4"><a href="#">服务视频</a></li>
-                             <li id="navId5"><a href="#">产品视频</a></li>
-                             <li id="navId6"><a href="#">活动视频</a></li>
-                             <li id="navId7"><a href="#">培训视频</a></li>
-                             <li id="navId8"><a href="#">微电影</a></li>
+                             <li id="navId1"><a href="newsVideo.html">所有视频</a></li>
+                             <li id="navId2"><a href="newsVideo.html?videoTypeId=1">新闻视频</a></li>
+                             <li id="navId3"><a href="newsVideo.html?videoTypeId=2">宣传片</a></li>
+                             <li id="navId4"><a href="newsVideo.html?videoTypeId=3">服务视频</a></li>
+                             <li id="navId5"><a href="newsVideo.html?videoTypeId=4">产品视频</a></li>
+                             <li id="navId6"><a href="newsVideo.html?videoTypeId=5">活动视频</a></li>
+                             <li id="navId7"><a href="newsVideo.html?videoTypeId=6">培训视频</a></li>
+                             <li id="navId8"><a href="newsVideo.html?videoTypeId=7">微电影</a></li>
                      </ul>
                  </div>
-                 <h5 class="Video_sort">排序：<a href="#" class="on">按最新发布</a><em>|</em><a href="#">按播放次数</a></h5>
-                 <ul class="Video_list">
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p1.jpg" /></a></div>
-                              <span><a href="newsVideoInfo.html">《创业资本圈》栏目</a></span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p2.jpg" /></a></div>
-                              <span>新闻联播</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p1.jpg" /></a></div>
-                              <span>《创业资本圈》栏目</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p2.jpg" /></a></div>
-                              <span>新闻联播</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p3.jpg" /></a></div>
-                              <span>《创业资本圈》栏目</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p4.jpg" /></a></div>
-                              <span>新闻联播</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p1.jpg" /></a></div>
-                              <span>《创业资本圈》栏目</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p2.jpg" /></a></div>
-                              <span>新闻联播</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p3.jpg" /></a></div>
-                              <span>《创业资本圈》栏目</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p4.jpg" /></a></div>
-                              <span>新闻联播</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p3.jpg" /></a></div>
-                              <span>《创业资本圈》栏目</span>
-                              <em>2014-04-30</em>
-                       </li>
-                       <li>
-                              <div class="pic"><a href="#"><img src="images/temp/News_p4.jpg" /></a></div>
-                              <span>新闻联播</span>
-                              <em>2014-04-30</em>
-                       </li>
-                 </ul>
-                 <!--Pages-->
-                 <div class="Pages">
-                        <span class="p_cur">目前在第<b>1</b>页,</span>
-                        <span class="p_count">共有<b>3</b>页,</span>
-                        <span class="p_total">共有<b>3</b>条记录</span>
-                        <span class="p_page">
-                        <a href="#" class="a_first">首页</a><a href="#" class="a_prev">上一页</a>
-                        <em class="num"><a href="#" class="a_cur">1</a><a href="#">2</a><a href="#">3</a></em>
-                        <a href="#" class="a_next">下一页</a><a href="#" class="a_end">末页</a> 
-                        <b class="f1">跳转到</b>
-                        <input class="i_text" type="text" name="textfield" id="textfield" />
-                        <b class="f2">页</b>
-                        <input class="i_button" type="submit" name="button" id="button" value="" />
-                    </span>
-                 </div>
-                 <!--Pages-->
+                 <h5 class="Video_sort">排序：<a id="playTimeId" class="on" href="javascript:void(0);" onclick="playTime()">按最新发布</a><em>|</em><a id="playNumId" href="javascript:void(0);" onclick="playNum()">按播放次数</a></h5>
+                 <ul class="Video_list" id="videoUl" style="float: left"></ul>
+                 <div id="pageId" style="clear: left"></div>
                  <!--End-->
                  
           </div>
@@ -305,7 +357,6 @@
     <script type="text/javascript" language="javascript">
         jQuery("#nav3 a").attr("class","acur");
 		jQuery("#menu4").attr("class","acur");
-		jQuery("#navId1").attr("class","acur");
     </script>
     
 </body>

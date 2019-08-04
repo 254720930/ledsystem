@@ -11,6 +11,102 @@
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
+<script type="text/javascript">
+
+    $.post("news/getAllNews",null,function (data) {
+        var num1 = 1;
+        var num1_li = 1;
+        var num2 = 1;
+        var num3 = 1;
+        $.each(data,function (index,obj) {
+            if(obj.newsTypeId == 1){
+                var title = obj.newsTitle;
+                var content =obj.newsContent;
+                if (title.length > 35) {
+                    title = obj.newsTitle.substring(0, 35) + "...";
+                }
+                if (content.length > 80) {
+                    content = obj.newsContent.substring(0, 80) + "..."
+                }
+                if(17 >= num1){
+                    if(4 >= num1_li){
+                        $("#liId"+num1_li+" a").attr("href","newsInfo.html?newsId="+obj.newsId);
+                        $("#liId"+num1_li+" img").attr("src",obj.newsImageUrl);
+                        $("#liId"+num1_li+" span").html(title);
+                        num1_li++;
+                    }
+                    var li ="";
+                    if(num1 == 1){
+                        li = "<li class='top'><span>"+title+"</span><dl>"+content+"</dl></li>";
+                    }else {
+                        li = "<li><em>"+obj.newsPublishTime+"</em><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></li>";
+                    }
+                    $("#ulId1").append(li);
+                    num1++;
+                }
+            }else if(obj.newsTypeId == 2){
+                var title = obj.newsTitle;
+                var content =obj.newsContent;
+                if (title.length > 15) {
+                    title = obj.newsTitle.substring(0, 15) + "...";
+                }
+                if (content.length > 65) {
+                    content = obj.newsContent.substring(0, 65) + "..."
+                }
+                if(6 >= num2){
+                    var li ="";
+                    if(num2 == 1){
+                        li = "<li class='top'><div class='pic'><a href='newsInfo.html?newsId="+obj.newsId+"'><img src='"+obj.newsImageUrl+"' /></a></div><span><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></span><dl>"+content+"</dl></li>";
+                    }else {
+                        li = "<li><em>"+obj.newsPublishTime+"</em><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></li>";
+                    }
+                    $("#ulId2").append(li);
+                    num2++;
+                }
+            }else if(obj.newsTypeId == 3){
+                var title = obj.newsTitle;
+                var content =obj.newsContent;
+                if (title.length > 15) {
+                    title = obj.newsTitle.substring(0, 15) + "...";
+                }
+                if (content.length > 65) {
+                    content = obj.newsContent.substring(0, 65) + "..."
+                }
+                if(6 >= num3){
+                    var li ="";
+                    if(num3 == 1){
+                        li = "<li class='top'><div class='pic'><a href='newsInfo.html?newsId="+obj.newsId+"'><img src='"+obj.newsImageUrl+"' /></a></div><span><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></span><dl>"+content+"</dl></li>";
+                    }else {
+                        li = "<li><em>"+obj.newsPublishTime+"</em><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></li>";
+                    }
+                    $("#ulId3").append(li);
+                    num3++;
+                }
+            }
+        })
+    });
+
+    //视频中心
+    $.get("video/getAllVideoByLimit",null,function (data) {
+        $.each(data,function (index,obj) {
+            if(index == 3){
+                $("#videoId2 a").attr("href","newsVideoInfo.html?videoId="+obj.videoId);
+                $("#videoId2 img").attr("src",obj.videoImageUrl);
+            }else{
+                var chlid ="<span><a href='newsVideoInfo.html?videoId="+obj.videoId+"'><img src='"+obj.videoImageUrl+"' /></a></span>"
+                $("#videoId1").append(chlid);
+            }
+        })
+    });
+
+    //资料下载
+    $.get("data/getAllDataByLimit",null,function (data) {
+        $.each(data,function (index,obj) {
+            var li = "<li><span><a href='"+obj.downloadUrl+"'>点击下载 |</a></span>"+obj.dataTitle+"</li>";
+            $("#downId").append(li);
+        })
+    });
+</script>
 
 </head>
 <body>
@@ -44,9 +140,9 @@
                     <li id="nav3"><span><a href="newsIndex.html">新闻资讯</a></span>
                          <div class="sub">
                                 <dl>
-                                       <a href="news.html">公司新闻</a>
-                                       <a href="news.html">案例新闻</a>
-                                       <a href="news.html">媒体报道</a>
+                                       <a href="news.html?newsTypeId=1">公司新闻</a>
+                                       <a href="news.html?newsTypeId=2">案例新闻</a>
+                                       <a href="news.html?newsTypeId=3">媒体报道</a>
                                        <a href="newsVideo.html">视频中心</a>
                                        <a href="newsDown.html">资料下载</a>
                                 </dl>
@@ -94,14 +190,14 @@
                
                  <!--公司新闻-->
                  <div class="News_Recreation">
-                      <h3 class="Title_h3"><a href="#" class="more"></a><span>公司新闻</span></h3>
+                      <h3 class="Title_h3"><a href="news.html?newsTypeId=1" class="more"></a><span>公司新闻</span></h3>
                       <div class="qh">
                            <div class="photo">
                            <ul>
-                                  <li><a href="#" target="_blank"><img src="images/temp/About_p4.jpg" /></a><span>迈欧资讯是中国领先的整合IT服务提供商</span></li>
-                                  <li><a href="#" target="_blank"><img src="images/temp/About_p5.jpg" /></a><span>02迈欧资讯是中国领先的整合IT服务提供商</span></li>
-                                  <li><a href="#" target="_blank"><img src="images/temp/About_p6.jpg" /></a><span>03迈欧资讯是中国领先的整合IT服务提供商</span></li>
-                                  <li><a href="#" target="_blank"><img src="images/temp/About_p7.jpg" /></a><span>04迈欧资讯是中国领先的整合IT服务提供商</span></li>
+                                  <li id="liId1"><a target="_blank"><img /></a><span></span></li>
+                                  <li id="liId2"><a target="_blank"><img /></a><span></span></li>
+                                  <li id="liId3"><a target="_blank"><img /></a><span></span></li>
+                                  <li id="liId4"><a target="_blank"><img /></a><span></span></li>
                            </ul>
                            </div>
                            <div class="hd">
@@ -117,43 +213,19 @@
                       </div>
                       <div class="space25"></div>
                       <div class="list">
-                           <ul>
-                                  <li class="top">
-                                       <span>中韩联手打造首档婚房真人秀《婚房在哪儿》月底即将开拍</span>
-                                       <dl>2014年3月11日，宏博昌荣传媒集团董事长窦鹏先生，中方代表金雨秀，以及黑马印象孔凡柳团队和韩方代表《花样年华》总导演宋儁基，导演金根华....</dl>
-                                  </li>
-                                  <li class="top">
-                                       <span>中韩联手打造首档婚房真人秀《婚房在哪儿》月底即将开拍</span>
-                                       <dl>2014年3月11日，宏博昌荣传媒集团董事长窦鹏先生，中方代表金雨秀，以及黑马印象孔凡柳团队和韩方代表《花样年华》总导演宋儁基，导演金根华....</dl>
-                                  </li>
-                                  <li><em>2014-04-25</em><a href="#">宏博昌荣传媒集团《腾飞 宏博昌荣》2014年年会恭贺新春</a></li>
-                                  <li><em>2014-04-25</em><a href="#">热烈祝贺我集团总裁窦鹏先生荣获2013年“中国文化产业年度人物” 提名奖</a></li>
-                                  <li><em>2014-04-25</em><a href="#">宏博昌荣传媒集团总裁窦鹏先生一行赴韩国进行考察</a></li>
-                                  <li><em>2014-04-25</em><a href="#">热烈祝贺我集团总裁窦鹏先生入围2013“中国文化产业年度人物”100强名单</a></li>
-                                  <li><em>2014-04-25</em><a href="#">2013年11月29日深圳市企业联合会于会长一行领导莅临宏博昌荣参观考察</a></li>
-                                  <li><em>2014-04-25</em><a href="#">深圳市领导寄语《商界传奇》 共同书写改革开发30年历程</a></li>
-                                  <li><em>2014-04-25</em><a href="#">光明日报社与宏博昌荣传媒集团战略合作签约仪式—梧桐山艺术小镇文化产业升级新举措</a></li>
-                                  <li><em>2014-04-25</em><a href="#">宏博昌荣传媒集团《腾飞 宏博昌荣》2014年年会恭贺新春</a></li>
-                                  <li><em>2014-04-25</em><a href="#">热烈祝贺我集团总裁窦鹏先生荣获2013年“中国文化产业年度人物” 提名奖</a></li>
-                                  <li><em>2014-04-25</em><a href="#">宏博昌荣传媒集团总裁窦鹏先生一行赴韩国进行考察</a></li>
-                                  <li><em>2014-04-25</em><a href="#">热烈祝贺我集团总裁窦鹏先生入围2013“中国文化产业年度人物”100强名单</a></li>
-                                  <li><em>2014-04-25</em><a href="#">2013年11月29日深圳市企业联合会于会长一行领导莅临宏博昌荣参观考察</a></li>
-                           </ul>
+                           <ul id="ulId1"></ul>
                       </div>
                  </div>
                  <!--公司新闻 End-->
+
                  <!--视频中心-->
                  <div class="News_video" id="AutoTable1">
-                      <h3 class="Title_h3"><a href="#" class="more"></a><span>视频中心</span></h3>
-                      <h2>
-                            <span><img src="images/temp/About_p4.jpg" /><em></em></span>
-                            <span><img src="images/temp/About_p5.jpg" /><em></em></span>
-                            <span><img src="images/temp/About_p6.jpg" /><em></em></span>
-                      </h2>
+                      <h3 class="Title_h3"><a href="newsVideo.html" class="more"></a><span>视频中心</span></h3>
+                      <h2 id="videoId1"></h2>
                       <div class="box" name="AutoContent">
                       
                             <!--1-->
-                            <div><img src="images/temp/About_p4.jpg" /></div>
+                            <div id="videoId2"><a><img /></a></div>
                             <!--1 End-->
                             
                       </div>
@@ -167,39 +239,17 @@
           
                  <!--案例新闻-->
                  <div class="News_case">
-                      <h3 class="Title_h3"><a href="#" class="more"></a><span>案例新闻</span></h3>
+                      <h3 class="Title_h3"><a href="news.html?newsTypeId=2" class="more"></a><span>案例新闻</span></h3>
                       <div class="box">
-                           <ul>
-                                  <li class="top">
-                                       <div class="pic"><a href="#"><img src="images/temp/About_p6.jpg" /></a></div>
-                                       <span><a href="#">促进中外文化交流，创建国际....</a></span>
-                                       <dl>我们认为LED背光行业去库存将于1Q12结束,从而带动LED行业企稳在明年旺季到来时景气回升;预计政府补贴和市场竞争双重驱动下,</dl>
-                                  </li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣传媒集团《腾飞恭贺新春</a></li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣艺员韩国新秀天团“7942”将进军中国娱乐圈</a></li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣传媒集团总一行赴韩国进行考察</a></li>
-                                  <li><em>04-22</em><a href="#">2013“中国文化产业年度人物”100强名单</a></li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣文化硅谷基地被认定成为第十届文博会分会场</a></li>
-                        </ul>
+                           <ul id="ulId2"></ul>
                       </div>
                  </div>
                  <!--案例新闻 End-->
                  <!--媒体报道-->
                  <div class="News_case">
-                      <h3 class="Title_h3"><a href="#" class="more"></a><span>媒体报道</span></h3>
+                      <h3 class="Title_h3"><a href="news.html?newsTypeId=3" class="more"></a><span>媒体报道</span></h3>
                       <div class="box">
-                           <ul>
-                                  <li class="top">
-                                       <div class="pic"><a href="#"><img src="images/temp/About_p7.jpg" /></a></div>
-                                       <span><a href="#">促进中外文化交流，创建国际....</a></span>
-                                       <dl>我们认为LED背光行业去库存将于1Q12结束,从而带动LED行业企稳在明年旺季到来时景气回升;预计政府补贴和市场竞争双重驱动下,</dl>
-                                  </li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣传媒集团《腾飞恭贺新春</a></li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣艺员韩国新秀天团“7942”将进军中国娱乐圈</a></li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣传媒集团总一行赴韩国进行考察</a></li>
-                                  <li><em>04-22</em><a href="#">2013“中国文化产业年度人物”100强名单</a></li>
-                                  <li><em>04-22</em><a href="#">宏博昌荣文化硅谷基地被认定成为第十届文博会分会场</a></li>
-                           </ul>
+                           <ul id="ulId3"></ul>
                       </div>
                  </div>
                  <!--媒体报道 End-->
@@ -213,19 +263,9 @@
                  <!--媒体报道 End-->
                  <!--资料下载-->
                  <div class="News_down">
-                      <h3 class="Title_h3"><a href="#" class="more"></a><span>资料下载</span></h3>
+                      <h3 class="Title_h3"><a href="newsDown.html" class="more"></a><span>资料下载</span></h3>
                       <div class="box">
-                           <ul>
-                                    <li><span><a href="#">点击下载 |</a></span>深圳市领导寄语《商界传奇》 30年历程</li>
-                                    <li><span><a href="#">点击下载 |</a></span>光明日报社与宏博昌荣签约引关注</li>
-                                    <li><span><a href="#">点击下载 |</a></span>罗湖区区长一行与宏博昌共同视察宏博昌...</li>
-                                    <li><span><a href="#">点击下载 |</a></span>宏博昌荣应邀参与2013四川会</li>
-                                    <li><span><a href="#">点击下载 |</a></span>2013年宏博昌荣影视基地即将建成！</li>
-                                    <li><span><a href="#">点击下载 |</a></span>宏博昌荣团队活梧桐山 拥抱第一缕阳光</li>
-                                    <li><span><a href="#">点击下载 |</a></span>宏博昌荣应邀出席河南卫视广告推广会</li>
-                                    <li><span><a href="#">点击下载 |</a></span>宏博昌荣应邀出席推广会</li>
-                                    <li><span><a href="#">点击下载 |</a></span>王求出席中央电台文化发展工程启动仪式</li>
-                           </ul>
+                           <ul id="downId"></ul>
                       </div>
                  </div>
                  <!--资料下载 End-->

@@ -11,7 +11,30 @@
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
-
+<script type="text/javascript">
+    $.get("news/getAllNews",null,function (data) {
+       $.each(data,function (index,obj) {
+           var title = obj.newsTitle;
+           var content =obj.newsContent;
+           if (title.length > 20) {
+               title = obj.newsTitle.substring(0, 20) + "...";
+           }
+           if (content.length > 50) {
+               content = obj.newsContent.substring(0, 50) + "..."
+           }
+           var li = "";
+           if(index == 0){
+                li = "<li class='top'><div class='pic'><a href='newsInfo.html?newsId="+obj.newsId+"'><img src='"+obj.newsImageUrl+"'/></a></div><h5><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></h5><dl>"+content+"<a href='newsInfo.html?newsId="+obj.newsId+"'>详细>></a></dl></li>";
+           }else {
+                li = "<li><span>["+obj.newsPublishTime+"]</span><a href='newsInfo.html?newsId="+obj.newsId+"'>"+title+"</a></li>";
+           }
+           $("#newsCenterId").append(li);
+          if(index == 5){
+              $break;
+          }
+       });
+    });
+</script>
 </head>
 <body>
     
@@ -44,9 +67,9 @@
                     <li id="nav3"><span><a href="newsIndex.html">新闻资讯</a></span>
                          <div class="sub">
                                 <dl>
-                                       <a href="news.html">公司新闻</a>
-                                       <a href="news.html">案例新闻</a>
-                                       <a href="news.html">媒体报道</a>
+                                       <a href="news.html?newsTypeId=1">公司新闻</a>
+                                       <a href="news.html?newsTypeId=2">案例新闻</a>
+                                       <a href="news.html?newsTypeId=3">媒体报道</a>
                                        <a href="newsVideo.html">视频中心</a>
                                        <a href="newsDown.html">资料下载</a>
                                 </dl>
@@ -131,19 +154,8 @@
           <!--产品中心-->
           <!--新闻中心-->
           <div class="H_news">
-               <h4 class="H_title"><a href="$" class="more"></a><b>新闻中心</b><em>news</em></h4>
-               <ul>
-                       <li class="top">
-                           <div class="pic"><a href="#"><img src="images/temp/H_p5.jpg"/></a></div>
-                           <h5><a href="#">锐拓显示出席第43届世界广告大会</a></h5>
-                           <dl>2014年5月9日在北京国家会议中心召开了第43届世界广告大会，锐拓显示董事长是石耀忠先生出席大会...<a href="#">详细>></a></dl>
-                       </li>
-                       <li><span>[2014-03-18]</span>德豪润达:成本领先的LED垂直整合龙头企业</li>
-                       <li><span>[2014-03-17]</span>德豪润达:转型已显成效、未来垂直整合是最大竞争力</li>
-                       <li><span>[2014-03-15]</span>德豪润达：开往春天的LED“地铁”</li>
-                       <li><span>[2014-03-16]</span>我国LED产业誉为21世纪战略性新兴产业</li>
-                       <li><span>[2014-03-13]</span>LED产业被认为是未来我国发展的支柱产业</li>
-               </ul>
+               <h4 class="H_title"><a href="newsIndex.html" class="more"></a><a href="newsIndex.html"><b>新闻中心</b></a><em>news</em></h4>
+               <ul id="newsCenterId"></ul>
           </div>
           <!--新闻中心 End-->
           <!--工程案例-->

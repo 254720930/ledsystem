@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.NewsMapper">
+    <resultMap id="newsResultMap" type="com.xcy.pojo.News">
+        <id column="news_id" property="newsId"></id>
+        <result property="newsContent" column="news_content"></result>
+        <result property="newsImageUrl" column="news_image_url"></result>
+        <result property="newsPublishTime" column="news_publish_time"></result>
+        <result property="newsTitle" column="news_title"></result>
+        <result property="newsTypeId" column="news_type_id"></result>
+    </resultMap>
+
+    <select id="getNewsByTypeId" parameterType="int" resultMap="newsResultMap">
+        select * from news
+        where news_type_id = #{id}
+        order by news_publish_time desc
+    </select>
+
+    <select id="getNewsById" parameterType="int" resultMap="newsResultMap">
+        select * from news where news_id = #{id}
+    </select>
+
+    <select id="getLastNews" resultMap="newsResultMap">
+        select news_id,news_title from news where news_type_id = #{param1} AND news_publish_time >= #{param2} AND news_id != #{param3}
+        ORDER BY ABS(news_publish_time - #{1}) ASC
+        limit 1
+    </select>
+
+    <select id="getNextNews" resultMap="newsResultMap">
+        select news_id,news_title from news where news_type_id = #{param1} AND #{param2} >= news_publish_time AND news_id != #{param3}
+        ORDER BY ABS(#{1} - news_publish_time) ASC
+        limit 1
+    </select>
+
+    <select id="getAllNews" resultMap="newsResultMap">
+        select * from news
+        order by news_publish_time desc
+    </select>
+</mapper>
