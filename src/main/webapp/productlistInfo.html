@@ -380,18 +380,18 @@
                     $("#goodsType").html(goods.goodsType + "<br />包括：8mm、10mm、16mm等产品");
                     $("#goodsFeature").html("<h4 class=\"Product_title\"><span>产品特点</span></h4>\n<div class=\"box\">\n" + goods.goodsFeature + "</div>");
                     $("#goodsParametersImgUrl").html("<img src=\""+goods.goodsParametersImgUrl+"\"/>");
-                    /*$("#goodsImgUrl1").html(
-                        $(goods).each(
-                            alert("1111111");
-                            <li><img src="" + this.goodsImg + "" /></li>
-                        );
-                    )*/
-                    /*$("#goodsImgUrl2").html("<ul>\n" +
-                        "                       <li><img src=\"http://localhost:8081/images/temp/P7.jpg\" /></li>\n" +
-                        "                       <li><img src=\"http://localhost:8081/images/temp/P6.jpg\" /></li>\n" +
-                        "                       <li><img src=\"http://localhost:8081/images/temp/P5.jpg\" /></li>\n" +
-                        "                       <li><img src=\"http://localhost:8081/images/temp/P4.jpg\" /></li>\n" +
-                        "               </ul>");*/
+                    $("#goodsImgUrl1").html("<ul>\n" +
+                    "                       <li><img src=\""+goods.goodsImg[0]+"\"/></li>\n" +
+                    "                       <li><img src=\""+goods.goodsImg[1]+"\" /></li>\n" +
+                    "                       <li><img src=\""+goods.goodsImg[2]+"\" /></li>\n" +
+                    "                       <li><img src=\""+goods.goodsImg[3]+"\" /></li>\n" +
+                        "               </ul>")
+                    $("#goodsImgUrl2").html("<ul>\n" +
+                        "                       <li><img src=\""+goods.goodsImg[0]+"\"/></li>\n" +
+                        "                       <li><img src=\""+goods.goodsImg[1]+"\" /></li>\n" +
+                        "                       <li><img src=\""+goods.goodsImg[2]+"\" /></li>\n" +
+                        "                       <li><img src=\""+goods.goodsImg[3]+"\" /></li>\n" +
+                        "               </ul>");
                 }
             });
         })
