@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xcy.mapper.CompanyMapper">
+    <select id="articleList" resultType="com.xcy.pojo.Article">
+        select id,title,content,time,imgUrl,mark from article
+    </select>
+    <select id="companyList" resultType="com.xcy.pojo.Company" >
+        select id,intro,culture,merit from company
+    </select>
+</mapper>

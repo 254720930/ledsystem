@@ -7,4 +7,11 @@
     <select id="login" parameterType="com.xcy.pojo.Admin" resultType="string">
         select role from admin where username=#{username} and password=#{password}
     </select>
+    <select id="showAdminAll" resultType="com.xcy.pojo.Admin">
+        select id,username,password,role from admin
+    </select>
+    <select id="showAdmin" parameterType="com.xcy.pojo.Admin" resultType="com.xcy.pojo.Admin">
+        select id,username,password,role from admin where username=#{username}
+    </select>
+
 </mapper>

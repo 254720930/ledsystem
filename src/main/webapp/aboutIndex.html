@@ -6,7 +6,10 @@
 <meta name="Author" content="">
 <title></title>
 <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
-<script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
 <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -29,7 +32,7 @@
                          <div class="sub">
                                 <dl>
                                        <a href="about.html">公司简介</a>
-                                       <a href="about.html">发展历程</a>
+                                       <a href="aboutHistory.html">发展历程</a>
                                        <a href="about.html">企业文化</a>
                                        <a href="about.html">荣誉资质</a>
                                        <a href="about.html">电子期刊</a>
@@ -105,6 +108,9 @@
                  </div>
                  <!--公司简介 End-->
                  <!--发展历程-->
+              <script type="text/javascript">
+
+              </script>
                  <div class="About_history">
                       <h3 class="Title_h3"><a href="#" class="more"></a><span>发展历程</span></h3>
                       <div class="year">
@@ -112,20 +118,14 @@
                           <div class="arrowNext" id="RightArr1"></div>
                           <div class="box" id="ISL_Cont_1">
                               <ul>
-                                    <li id="year1" onmouseover="setTab('year',1,8)">2006</li>
-                                    <li id="year2" onmouseover="setTab('year',2,8)">2007</li>
-                                    <li id="year3" onmouseover="setTab('year',3,8)">2008</li>
-                                    <li id="year4" onmouseover="setTab('year',4,8)">2009</li>
-                                    <li id="year5" onmouseover="setTab('year',5,8)">2010</li>
-                                    <li id="year6" onmouseover="setTab('year',6,8)">2011</li>
-                                    <li id="year7" onmouseover="setTab('year',7,8)">2012</li>
-                                    <li id="year8" onmouseover="setTab('year',8,8)">2013</li>
+
                               </ul>
                           </div>
 						  <script src="Script/Tabs.js" type="text/javascript"></script>
                           <script language="JavaScript" type="text/javascript" src="Script/ScrollPic.js"></script>
                           <script language="javascript" type="text/javascript">
                                    <!--//--><![CDATA[//><!--
+
                                    var scrollPic_02 = new ScrollPic();
                                    scrollPic_02.scrollContId   = "ISL_Cont_1"; //内容容器ID
                                    scrollPic_02.arrLeftId      = "LeftArr1";//左箭头ID
@@ -144,19 +144,8 @@
                       </div>
                       <div class="listBox">
                           <ul>
-                                 <li id="con_year_1">
-                                      <h4><a href="$">锐拓的LED视频产品，被广泛运用于全球数十个国家，不断在国际知名赛事和场合中崭露头角，捕捉和聚焦着千百万观众的</a></h4>
-                                      <dl><img src="images/temp/About_p2.jpg" /></dl>
-                                      <span>成立于1997年，从最初的生产LED模组、器件，发展到2000年开始研发制造LED全彩显示屏，直至2009年进军LED照明，锐
-                                      拓专注于服务一系列的专业化市场－广告与品牌、体育场馆、大型活动与娱乐、LED照明与装饰，为之提供形态各异的LED应用产品解决方案。今天，锐拓的LED视频产品，被广泛运用于全球数...</span>
-                                 </li>
-                                 <li id="con_year_2">2007</li>
-                                 <li id="con_year_3">2008</li>
-                                 <li id="con_year_4">2009</li>
-                                 <li id="con_year_5">2010</li>
-                                 <li id="con_year_6">2011</li>
-                                 <li id="con_year_7">2012</li>
-                                 <li id="con_year_8">2013</li>
+
+
                           </ul>    
                       </div>
                  </div>
@@ -357,11 +346,30 @@
     <!--Bottom End-->
     
     <script type="text/javascript" language="javascript">
-        jQuery("#nav2 a").attr("class","acur");
-	    jQuery("#year1").attr("class","acur");
+
+
+
 	    $(function () {
 			$("#con_year_1").show();
 		});
+	    $(function () {
+            $.get("comp/articleList",null,function(data){
+                var i = 1;
+                $(data).each(function(){
+                    var time = this.time.substring(0,4);
+                    var id = this.id;
+                    var li1 = "<li id='year"+id+"' onmouseover=\"setTab("+"'year',"+id+",8)\">"+time+"</li>";
+                    var li2 = "<li id='con_year_"+id+"'><h4><a href='$'>"+this.title+"</a></h4><dl><img src='images/temp/"+this.imgUrl+"'/></dl><span>"+this.content+"</span></li>";
+                    $("div[class=listBox] ul").append(li2);
+                    $("div[id=ISL_Cont_1] ul").append(li1);
+                    $("div[class=listBox] ul li[class=con_year_1]").css("display","block");
+                    $("#con_year_1").show();
+                    jQuery("#nav2 a").attr("class","acur");
+                    jQuery("#year1").attr("class","acur");
+                })
+            });
+        })
+
     </script>
     
 </body>

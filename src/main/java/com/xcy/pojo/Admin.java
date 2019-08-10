@@ -8,13 +8,17 @@ public class Admin {
     private String role;
 
     public String getRole() {
-        return role;
+        if (role == "1" || role.equals("1")){
+            return "超级管理员";
+        }else if (role == "2" || role.equals("2")){
+            return "普通管理员";
+        }else {
+            return "你猜";
+        }
     }
-
     public void setRole(String role) {
         this.role = role;
     }
-
     public Admin() {
     }
 

@@ -125,13 +125,10 @@
                             <a class="waves-effect" data-ma-action="clear-localstorage" href="javascript:;"><i class="zmdi zmdi-delete"></i> 清除缓存</a>
                         </li>
                         <li>
-                            <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>
-                        </li>
-                        <li>
                             <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>
                         </li>
                         <li>
-                            <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-run"></i> 退出登录</a>
+                            <a class="waves-effect" href="${pageContext.request.contextPath}/admin/exit"><i class="zmdi zmdi-run"></i> 退出登录</a>
                         </li>
                     </ul>
                 </li>
@@ -155,16 +152,13 @@
             </a>
             <ul class="main-menu">
                 <li>
-                    <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-account"></i> 个人资料</a>
-                </li>
-                <li>
-                    <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-face"></i> 隐私管理</a>
+                    <a class="waves-effect" href="javascript:Tab.addTab('管理员信息管理', '${pageContext.request.contextPath}/admin/showAdmin');"><i class="zmdi zmdi-account"></i> 管理员信息管理</a>
                 </li>
                 <li>
                     <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-settings"></i> 系统设置</a>
                 </li>
                 <li>
-                    <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-run"></i> 退出登录</a>
+                    <a class="waves-effect" href="${pageContext.request.contextPath}/admin/exit"><i class="zmdi zmdi-run"></i> 退出登录</a>
                 </li>
             </ul>
         </div>
@@ -174,24 +168,16 @@
             <li>
                 <a class="waves-effect" href="javascript:Tab.addTab('首页', 'home');"><i class="zmdi zmdi-home"></i> 首页</a>
             </li>
-            <li class="sub-menu system_menus system_1 0">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 客户留言管理 </a>
-                <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('系统管理', '${pageContext.request.contextPath}/message/clientMessage');">系统管理</a></li>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('系统管理', '${pageContext.request.contextPath}/message/hiring');">招聘信息管理</a></li>
-
-                </ul>
-            </li>
             <li class="sub-menu system_menus system_1 1">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 客户留言管理 </a>
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts"></i> 客户留言管理 </a>
                 <ul>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('客户留言管理', '${pageContext.request.contextPath}/solution/solutionList');">客户留言管理</a></li>
                 </ul>
             </li>
 
 
-            <li class="sub-menu system_menus system_1 3">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts"></i> 新闻资讯管理</a>
+            <li class="sub-menu system_menus system_1 2">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 新闻资讯管理</a>
                 <ul>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('公司新闻', '${pageContext.request.contextPath}/news/companyNews');">公司新闻</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('案例新闻', '${pageContext.request.contextPath}/news/caseNews');">案例新闻</a></li>
@@ -202,13 +188,13 @@
             </li>
 
 
-            <li class="sub-menu system_menus system_1 1">
-                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-accounts-list"></i> 商品管理 </a>
+            <li class="sub-menu system_menus system_1 3">
+                <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-menu"></i> 商品管理 </a>
                 <ul>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('商品管理', '${pageContext.request.contextPath}/goods/show');">商品管理</a></li>
                 </ul>
             </li>
-            <li class="sub-menu system_menus system_2 13">
+            <li class="sub-menu system_menus system_1 4">
                 <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-menu"></i>工程案例</a>
                 <ul>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('工程案例', '${pageContext.request.contextPath}/project/case');">工程案例</a></li>
@@ -216,10 +202,10 @@
                 </ul>
             </li>
 
-            <li class="sub-menu system_menus system_2 15">
+            <li class="sub-menu system_menus system_1 5">
                 <a class="waves-effect" href="javascript:;"><i class="zmdi zmdi-collection-text"></i> 公司信息管理</a>
                 <ul>
-                    <li><a class="waves-effect" href="javascript:Tab.addTab('文章管理', '${pageContext.request.contextPath}/company/info');">公司信息</a></li>
+                    <li><a class="waves-effect" href="javascript:Tab.addTab('公司信息', '${pageContext.request.contextPath}/comp/showCompany');">公司信息</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">发展历程</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">员工专区</a></li>
                     <li><a class="waves-effect" href="javascript:Tab.addTab('回收管理', '${pageContext.request.contextPath}/admin/goods');">专题活动</a></li>
