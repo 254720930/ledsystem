@@ -36,7 +36,6 @@ public class AdminContorller {
                 }
             }
         }*/
-
         return "behind/login";
     }
 
@@ -58,7 +57,6 @@ public class AdminContorller {
                 cookie.setPath("/");
                 response.addCookie(cookie);
                 jedisClient.set(username,role);
-
             return loginJsom;
         }else {
             LoginJson loginJsom = new LoginJson();

@@ -1,16 +1,15 @@
 package com.xcy.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.xcy.pojo.Article;
 import com.xcy.pojo.Company;
+import com.xcy.pojo.News;
 import com.xcy.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-@Controller
+@RestController
 @RequestMapping("/comp")
 public class CompanyController {
 
@@ -31,5 +30,12 @@ public class CompanyController {
     public List<Article> articleList(){
         List<Article> companyList = companyService.articleList();
         return companyList;
+    }
+
+    @RequestMapping("/getCompsByTypeId/{mark}")
+    public PageInfo getNewsByTypeId(@PathVariable("mark")int id, @RequestParam(name = "page", required = true, defaultValue = "1") Integer page, @RequestParam(name = "pageSize", required = true, defaultValue = "10") Integer pageSize){
+        List<Article> compsList = companyService.getCompsByTypeId(id,page,pageSize);
+        PageInfo pageInfo = new PageInfo(compsList);
+        return pageInfo;
     }
 }

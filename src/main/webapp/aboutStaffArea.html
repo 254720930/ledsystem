@@ -7,7 +7,11 @@
 <title></title>
 <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
 <script src="Script/jquery-1.4.2.min.js" type="text/javascript"></script>
-<!--[if IE 6]>
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="text/javascript" src="layui/layui.js" ></script>
+
+
+    <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
 <![endif]-->
@@ -110,6 +114,70 @@
                </div>
           </div>
           <!--左边 End-->
+
+        <script type="text/javascript">
+            //需要获取到浏览器后面的id值，然后发送ajax请求给controller
+            function GetQueryString(name)
+            {
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+                if(r!=null)return  unescape(r[2]); return null;
+            }
+            $(function () {
+                initLayPage();
+            });
+            function initLayPage(page,pageSize) {
+                var id = GetQueryString("mark");
+                if(page == null || pageSize == null){
+                    page = 1;
+                    pageSize = 10;
+                }
+
+                $.post("comp/getCompsByTypeId/"+id,{"page":page,"pageSize":pageSize}, function (data) {
+                    layui.use(['laypage', 'layer'], function () {
+                        var pagelay = layui.laypage;
+                        pagelay.render({
+                            elem: 'pageId',
+                            count: data.total,
+                            curr: data.pageNum,
+                            limit: data.pageSize, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                            first: "首页",
+                            last: "尾页",
+                            layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                            jump: function (obj, first) {
+                                if (!first) {
+                                    var num1 = obj.curr;
+                                    var num2 = obj.limit;
+                                    initLayPage(num1,num2);
+                                }
+                            }
+                        });
+                        var num = (page - 1) * pageSize;
+                        fillUr(data.list, num); //页面填充
+                    })
+                });
+
+                //填充表格数据
+                function fillUr(data, num) {
+                    $(".Staff_list ul").empty(); //清空上一页次打印的数据
+                    $.each(data, function (index, obj) {
+                        // id 很多时候并不是连续的，如果为了显示比较连续的记录数，可以这样根据当前页和每页条数动态的计算记录序号
+                        index = index + num + 1;
+                        var title = obj.title;
+                        var time = this.time;
+                        var id = this.id;
+                        if (title.length > 50) {
+                            title = obj.title.substring(0, 35) + "...";
+                        }
+                        var li3 = "<li><span>"+"["+time+"]"+"</span><a href='aboutStaffAreaInfo.html?id='"+id+">"+title+"</a></li>";
+                        $(".Staff_list ul").append(li3);
+
+
+                        $(this).attr("class","acur");
+                    })
+                }
+            }
+        </script>
           <!--右边-->
           <div class="RightSidebar">
           <div class="mianContent">
@@ -123,39 +191,14 @@
                  </div>
                  <div class="space10"></div>
                  <div class="Staff_list">
-                        <ul>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">观音岩景区种菜养殖丰富员工餐桌鹰潭多家旅行社组团“踩线”三爪仑</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">三爪仑旅游推荐会走进浙江龙游玉山县饶清华县长调研琴山旅游度假区项目</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">胡三红副县长实地考察三爪仑旅游项目建设进展</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">三爪仑核心资源整合开发项目指挥部赴明月山考察高山小火车</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">观音岩景区旅游渐入佳境江湾大酒店组织全体员工乡村游</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">三清集团荣获全国企业文化优秀成果奖</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">上饶国旅荣获2012年度全省旅行社经营业绩“二十佳”观音岩景区迎来大型自驾游</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">靖安县田辉县长视察三爪仑旅游工作三清集团荣获全国企业文化优秀成果奖</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">观音岩景区种菜养殖丰富员工餐桌鹰潭多家旅行社组团“踩线”三爪仑</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">三爪仑旅游推荐会走进浙江龙游玉山县饶清华县长调研琴山旅游度假区项目</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">胡三红副县长实地考察三爪仑旅游项目建设进展</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">三爪仑核心资源整合开发项目指挥部赴明月山考察高山小火车</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">观音岩景区旅游渐入佳境江湾大酒店组织全体员工乡村游</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">三清集团荣获全国企业文化优秀成果奖</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">上饶国旅荣获2012年度全省旅行社经营业绩“二十佳”观音岩景区迎来大型自驾游</a></li>
-                             <li><span>[2014-03-18]</span><a href="aboutStaffAreaInfo.html">靖安县田辉县长视察三爪仑旅游工作三清集团荣获全国企业文化优秀成果奖</a></li>
-                        </ul>
+
+                     <!-- 存放数据 -->
+                     <ul></ul>
+
+
                         <!--Pages-->
-                        <div class="Pages">
-                              <span class="p_cur">目前在第<b>1</b>页,</span>
-                              <span class="p_count">共有<b>3</b>页,</span>
-                              <span class="p_total">共有<b>3</b>条记录</span>
-                              <span class="p_page">
-                              <a href="#" class="a_first">首页</a><a href="#" class="a_prev">上一页</a>
-                              <em class="num"><a href="#" class="a_cur">1</a><a href="#">2</a><a href="#">3</a></em>
-                              <a href="#" class="a_next">下一页</a><a href="#" class="a_end">末页</a> 
-                              <b class="f1">跳转到</b>
-                              <input class="i_text" type="text" name="textfield" id="textfield" />
-                              <b class="f2">页</b>
-                              <input class="i_button" type="submit" name="button" id="button" value="" />
-                          </span>
-                        </div>
+                     <!-- 存放分页的容器 -->
+                     <div id="pageId"></div>
                         <!--Pages-->
                  </div>
                  <!--End-->

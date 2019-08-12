@@ -5,12 +5,12 @@
 <meta http-equiv="x-ua-compatible" content="ie=7" />
 <meta name="Author" content="">
 <title></title>
-<link href="css/toPage.css" rel="stylesheet" type="text/css" />
     <link href="css/css_whir.css" rel="stylesheet" type="text/css" />
-
+    <link rel="stylesheet" href="layui/css/layui.css" />
+    <script type="text/javascript" src="layui/layui.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 
-    <script src="js/toPage.js"></script>
+
 <!--[if IE 6]>
 <script src="Script/pngAlaph.js"></script>
 <script>DD_belatedPNG.fix('*');</script>
@@ -86,13 +86,12 @@
               </script>
         </div>
     </div>
-    <!--top End-->
+
     
     <!--Star-->
     <div class="Bgbody">
     <div class="Content">
     <div class="Current">首页 > 走进锐拓 > <span>发展历程</span></div>
-    
           <!--左边-->
           <div class="Sidebar">
                          <div class="Menu">
@@ -117,7 +116,6 @@
           <!--右边-->
           <div class="RightSidebar">
           <div class="mianContent">
-          
                  <!--Star-->
                  <div class="History_year">
                       <div class="arrowPrev" id="LeftArr1"></div>
@@ -125,7 +123,6 @@
                       <div class="box" id="ISL_Cont_1">
                           <ul>
                                 <li id="navId1"><a href="#">2006</a></li>
-
                           </ul>
                       </div>
                      <script language="JavaScript" type="text/javascript" src="Script/ScrollPic.js"></script>
@@ -147,53 +144,87 @@
                                //--><!]]>
                       </script>
                  </div>
-                 <div class="History_list">
-                       <ul>
-                               <li>
-                                       <h4><a href="$">锐拓的LED视频产品，被广泛运用于全球数十个国家，不断在国际知名赛事和场合中崭露头角，捕捉和聚焦着千百万观众的</a></h4>
-                                       <dl><img src="images/temp/About_p2.jpg" /></dl>
-                                       <span>成立于1997年，从最初的生产LED模组、器件，发展到2000年开始研发制造LED全彩显示屏，直至2009年进军LED照明，锐
-                                       拓专注于服务一系列的专业化市场－广告与品牌、体育场馆、大型活动与娱乐、LED照明与装饰，为之提供形态各异的LED应用产品解决方案。今天，锐拓的LED视频产品，被广泛运用于全球数...</span>
-                               </li>
-                               <li>
-                                       <h4><a href="$">锐拓的LED视频产品，被广泛运用于全球数十个国家，不断在国际知名赛事和场合中崭露头角，捕捉和聚焦着千百万观众的</a></h4>
-                                       <dl><img src="images/temp/About_p3.jpg" /></dl>
-                                       <span>成立于1997年，从最初的生产LED模组、器件，发展到2000年开始研发制造LED全彩显示屏，直至2009年进军LED照明，锐
-                                       拓专注于服务一系列的专业化市场－广告与品牌、体育场馆、大型活动与娱乐、LED照明与装饰，为之提供形态各异的LED应用产品解决方案。今天，锐拓的LED视频产品，被广泛运用于全球数...</span>
-                               </li>
-                               <li>
-                                       <h4><a href="$">锐拓的LED视频产品，被广泛运用于全球数十个国家，不断在国际知名赛事和场合中崭露头角，捕捉和聚焦着千百万观众的</a></h4>
-                                       <dl><img src="images/temp/About_p4.jpg" /></dl>
-                                       <span>成立于1997年，从最初的生产LED模组、器件，发展到2000年开始研发制造LED全彩显示屏，直至2009年进军LED照明，锐
-                                       拓专注于服务一系列的专业化市场－广告与品牌、体育场馆、大型活动与娱乐、LED照明与装饰，为之提供形态各异的LED应用产品解决方案。今天，锐拓的LED视频产品，被广泛运用于全球数...</span>
-                               </li>
-                       </ul>
-                       <!--Pages-->
-                     <!--分页容器_1-->
-                     <div class="page_1"></div>
+              <script type="text/javascript">
+                  //需要获取到浏览器后面的id值，然后发送ajax请求给controller
+                  function GetQueryString(name)
+                  {
+                      var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                      var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+                      if(r!=null)return  unescape(r[2]); return null;
+                  }
+                  $(function () {
+                      initLayPage();
+                  });
+                  function initLayPage(page,pageSize) {
+                      var id = GetQueryString("mark");
+                      if(page == null || pageSize == null){
+                          page = 1;
+                          pageSize = 10;
+                      }
 
-                     <div class="Pages">
-                              <span class="p_cur">目前在第<b>1</b>页,</span>
-                              <span class="p_count">共有<b>3</b>页,</span>
-                              <span class="p_total">共有<b>3</b>条记录</span>
-                              <span class="p_page">
-                              <a href="#" class="a_first">首页</a><a href="#" class="a_prev">上一页</a>
-                              <em class="num"><a href="#" class="a_cur">1</a><a href="#">2</a><a href="#">3</a></em>
-                              <a href="#" class="a_next">下一页</a><a href="#" class="a_end">末页</a> 
-                              <b class="f1">跳转到</b>
-                              <input class="i_text" type="text" name="textfield" id="textfield" />
-                              <b class="f2">页</b>
-                              <input class="i_button" type="submit" name="button" id="button" value="" />
-                          </span>
-                       </div>
-                       <!--Pages-->
+                      $.post("comp/getCompsByTypeId/"+id,{"page":page,"pageSize":pageSize}, function (data) {
+                          layui.use(['laypage', 'layer'], function () {
+                              var pagelay = layui.laypage;
+                              pagelay.render({
+                                  elem: 'pageId',
+                                  count: data.total,
+                                  curr: data.pageNum,
+                                  limit: data.pageSize, //每页显示的条数。laypage将会借助 count 和 limit 计算出分页数
+                                  first: "首页",
+                                  last: "尾页",
+                                  layout: ['count', 'prev', 'page', 'next', 'limit', 'skip'],
+                                  jump: function (obj, first) {
+                                      if (!first) {
+                                          var num1 = obj.curr;
+                                          var num2 = obj.limit;
+                                          initLayPage(num1,num2);
+                                      }
+                                  }
+                              });
+                              var num = (page - 1) * pageSize;
+                              fillUr(data.list, num); //页面填充
+                          })
+                      });
+
+                      //填充表格数据
+                      function fillUr(data, num) {
+                          $("div[class=History_list] ul").empty(); //清空上一页次打印的数据
+                          $.each(data, function (index, obj) {
+                              // id 很多时候并不是连续的，如果为了显示比较连续的记录数，可以这样根据当前页和每页条数动态的计算记录序号
+                              index = index + num + 1;
+                              var title = obj.title;
+                              var time = this.time.substring(0,4);
+                              var id = this.id;
+                              var li1 = "<li id='navId"+id+"'><a href='#'>"+time+"</a></li>";
+                              var li2 = "<li><h4><a href='$'>"+this.title+"</a></h4><dl><img src='images/temp/"+this.imgUrl+"'/></dl><span>"+this.content+"</span></li>";
+                              $("div[class=History_list] ul").append(li2);
+                              $("div[id=ISL_Cont_1] ul").append(li1);
+                              jQuery("#nav2 a").attr("class","acur");
+                              jQuery("#navId1").attr("class","acur");
+                              jQuery("#menu4").attr("class","acur");
+                              jQuery('.History_list li').eq(0).addClass('one') ;
+                          })
+                          $("div[id=ISL_Cont_1] ul li").click(function () {
+                              var arr = $("div[id=ISL_Cont_1] ul li");
+                              for (i=0;i<arr.length;i++) {
+                                  $(arr[i]).attr("class","");
+                              }
+                              $(this).attr("class","acur");
+                          })
+                      }
+                  }
+              </script>
+                 <div class="History_list">
+                     <!-- 存放数据 -->
+                     <ul></ul>
+
+                     <!-- 存放分页的容器 -->
+                     <div id="pageId"></div>
+
                  </div>
                  <!--End-->
-                 
           </div>
           </div>
-          <!--右边 End-->
-    
     <div class="space15"></div>
     </div>
     </div>
@@ -295,8 +326,6 @@
                     var time = this.time.substring(0,4);
                     var id = this.id;
                     var li1 = "<li id='navId"+id+"'><a href='#'>"+time+"</a></li>";
-                    var li2 = "<li><h4><a href='$'>"+this.title+"</a></h4><dl><img src='images/temp/"+this.imgUrl+"'/></dl><span>"+this.content+"</span></li>";
-                    $("div[class=History_list] ul").append(li2);
                     $("div[id=ISL_Cont_1] ul").append(li1);
                     jQuery("#nav2 a").attr("class","acur");
                     jQuery("#navId1").attr("class","acur");
@@ -314,17 +343,6 @@
 
         })
 
-    </script>
-    <script>
-        /*容器1参数*/
-        var obj_1={
-            obj_box:'.page_1',//翻页容器
-            total_item:72//条目总数
-            /*per_num:10,//每页条目数
-            current_page:8//当前页*/
-        };
-        /*调用分页方法,初始化数据*/
-        page_ctrl(obj_1);
     </script>
 </body>
 </html>

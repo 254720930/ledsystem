@@ -9,4 +9,9 @@
     <select id="companyList" resultType="com.xcy.pojo.Company" >
         select id,intro,culture,merit from company
     </select>
+    <select id="getCompsByTypeId" resultType="com.xcy.pojo.Article">
+        select * from article
+        where mark = #{id}
+        order by time desc
+    </select>
 </mapper>

@@ -10,4 +10,6 @@ public interface CompanyService {
     List<Company> companyList();
 
     List<Article> articleList();
+
+    List<Article> getCompsByTypeId(int id, Integer page, Integer pageSize);
 }

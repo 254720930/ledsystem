@@ -12,4 +12,6 @@ public interface CompanyMapper {
     List<Company> companyList();
 
     List<Article> articleList();
+
+    List<Article> getCompsByTypeId(int id);
 }

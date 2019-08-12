@@ -1,5 +1,6 @@
 package com.xcy.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.xcy.mapper.CompanyMapper;
 import com.xcy.pojo.Article;
 import com.xcy.pojo.Company;
@@ -24,5 +25,12 @@ public class CompanyServiceImp implements CompanyService {
     public List<Article> articleList() {
         List<Article> ArticleList = companyMapper.articleList();
         return ArticleList;
+    }
+
+    @Override
+    public List<Article> getCompsByTypeId(int id, Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+        List<Article> compsList =companyMapper.getCompsByTypeId(id);
+        return compsList;
     }
 }
