@@ -112,7 +112,29 @@ public class AdminContorller {
         return "behind/login";
     }
 
-
+    //添加后台管理员
+    @RequestMapping("/addAdmin")
+    public int addAdmin(Admin admin){
+        int result = adminService.addAdmin(admin);
+        return result;
+    }
+    //添加后台管理员
+    @RequestMapping("/deleteAdmin")
+    public int deleteAdmin(int id){
+        int result = adminService.deleteAdmin(id);
+        return result;
+    }
+    //编辑后台管理员信息展示信息
+    @RequestMapping("/getById")
+    public Admin getById(int id){
+        Admin admin = adminService.getById(id);
+        return admin;
+    }//编辑后台管理员信息展示信息
+    @RequestMapping("/updateAdmin")
+    public int updateAdmin(Admin admin){
+        int result = adminService.updateAdmin(admin);
+        return result;
+    }
 }
 
 

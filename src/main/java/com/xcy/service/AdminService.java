@@ -9,4 +9,13 @@ public interface AdminService {
     String login(Admin admin);
 
     List<Admin> showAdmin(String username);
+
+    int addAdmin(Admin admin);
+
+    int deleteAdmin(int id);
+
+
+    Admin getById(int id);
+
+    int updateAdmin(Admin admin);
 }

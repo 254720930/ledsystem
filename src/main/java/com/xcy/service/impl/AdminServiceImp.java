@@ -43,4 +43,28 @@ public class AdminServiceImp implements AdminService {
         }
         return adminList;
     }
+
+    @Override
+    public int addAdmin(Admin admin) {
+        int result = adminMapper.addAdmin(admin);
+        return result>0? 1:0;
+    }
+
+    @Override
+    public int deleteAdmin(int id) {
+        int result = adminMapper.deleteAdmin(id);
+        return result>0? 1:0;
+    }
+
+    @Override
+    public int updateAdmin(Admin admin) {
+        int result = adminMapper.addAdmin(admin);
+        return result>0? 1:0;
+    }
+
+    @Override
+    public Admin getById(int id) {
+        Admin admin = adminMapper.getById(id);
+        return admin;
+    }
 }

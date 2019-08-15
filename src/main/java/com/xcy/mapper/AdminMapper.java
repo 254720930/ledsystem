@@ -12,4 +12,12 @@ public interface AdminMapper {
     List<Admin> showAdminAll();
 
     String login(Admin admin);
+
+    int addAdmin(Admin admin);
+
+    int deleteAdmin(int id);
+
+
+
+    Admin getById(int id);
 }

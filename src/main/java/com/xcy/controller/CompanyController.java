@@ -3,7 +3,7 @@ package com.xcy.controller;
 import com.github.pagehelper.PageInfo;
 import com.xcy.pojo.Article;
 import com.xcy.pojo.Company;
-import com.xcy.pojo.News;
+
 import com.xcy.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
